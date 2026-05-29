@@ -1,0 +1,522 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function changedKeys() {
+      return request.resource.data.diff(resource.data).affectedKeys();
+    }
+
+    function unchangedCreateTimestamp() {
+      return !('createdAt' in request.resource.data)
+        || !('createdAt' in resource.data)
+        || request.resource.data.createdAt == resource.data.createdAt;
+    }
+
+    function noPrivilegeFields(data) {
+      return !data.keys().hasAny(['role', 'roles', 'isAdmin', 'admin', 'ownerId']);
+    }
+
+    function optionalString(data, field, max) {
+      return !(field in data) || (data[field] is string && data[field].size() <= max);
+    }
+
+    function optionalNullableString(data, field, max) {
+      return !(field in data)
+        || data[field] == null
+        || (data[field] is string && data[field].size() <= max);
+    }
+
+    function optionalBool(data, field) {
+      return !(field in data) || data[field] is bool;
+    }
+
+    function optionalNumber(data, field) {
+      return !(field in data) || data[field] is int || data[field] is float;
+    }
+
+    function optionalTimestamp(data, field) {
+      return !(field in data) || data[field] is timestamp;
+    }
+
+    function optionalMap(data, field) {
+      return !(field in data) || data[field] is map;
+    }
+
+    function optionalArray(data, field, max) {
+      return !(field in data) || (data[field] is list && data[field].size() <= max);
+    }
+
+    function requiredString(data, field, max) {
+      return field in data && data[field] is string && data[field].size() > 0 && data[field].size() <= max;
+    }
+
+    function requiredNumber(data, field) {
+      return field in data && (data[field] is int || data[field] is float);
+    }
+
+    function requiredBool(data, field) {
+      return field in data && data[field] is bool;
+    }
+
+    function requiredTimestamp(data, field) {
+      return field in data && data[field] is timestamp;
+    }
+
+    function requiredMap(data, field) {
+      return field in data && data[field] is map;
+    }
+
+    function requiredEnum(data, field, values) {
+      return field in data && data[field] in values;
+    }
+
+    function optionalEnum(data, field, values) {
+      return !(field in data) || data[field] in values;
+    }
+
+    function validReminderSent(data) {
+      return requiredMap(data, 'reminderSent')
+        && data.reminderSent.keys().hasOnly(['thirtyDays', 'sevenDays', 'oneDay', 'onDueDate'])
+        && requiredBool(data.reminderSent, 'thirtyDays')
+        && requiredBool(data.reminderSent, 'sevenDays')
+        && requiredBool(data.reminderSent, 'oneDay')
+        && requiredBool(data.reminderSent, 'onDueDate');
+    }
+
+    function validUserSettings(settings) {
+      return settings is map
+        && settings.keys().hasOnly(['theme', 'notifications', 'reminderTiming'])
+        && requiredEnum(settings, 'theme', ['dark', 'light'])
+        && requiredMap(settings, 'notifications')
+        && settings.notifications.keys().hasOnly([
+          'email',
+          'push',
+          'billReminders',
+          'warrantyAlerts',
+          'securityAlerts'
+        ])
+        && requiredBool(settings.notifications, 'email')
+        && requiredBool(settings.notifications, 'push')
+        && requiredBool(settings.notifications, 'billReminders')
+        && requiredBool(settings.notifications, 'warrantyAlerts')
+        && requiredBool(settings.notifications, 'securityAlerts')
+        && requiredMap(settings, 'reminderTiming')
+        && settings.reminderTiming.keys().hasOnly([
+          'thirtyDaysBefore',
+          'sevenDaysBefore',
+          'oneDayBefore',
+          'onDueDate'
+        ])
+        && requiredBool(settings.reminderTiming, 'thirtyDaysBefore')
+        && requiredBool(settings.reminderTiming, 'sevenDaysBefore')
+        && requiredBool(settings.reminderTiming, 'oneDayBefore')
+        && requiredBool(settings.reminderTiming, 'onDueDate');
+    }
+
+    function validUserDoc(userId) {
+      let data = request.resource.data;
+      return noPrivilegeFields(data)
+        && data.keys().hasOnly([
+          'uid',
+          'email',
+          'displayName',
+          'photoURL',
+          'createdAt',
+          'updatedAt',
+          'settings',
+          'masterPasswordHash'
+        ])
+        && data.uid == userId
+        && optionalString(data, 'email', 320)
+        && optionalString(data, 'displayName', 120)
+        && optionalNullableString(data, 'photoURL', 2048)
+        && optionalTimestamp(data, 'createdAt')
+        && optionalTimestamp(data, 'updatedAt')
+        && (!('settings' in data) || validUserSettings(data.settings))
+        && optionalString(data, 'masterPasswordHash', 2048);
+    }
+
+    function validBill() {
+      let data = request.resource.data;
+      return noPrivilegeFields(data)
+        && data.keys().hasOnly([
+          'title',
+          'amount',
+          'currency',
+          'dueDate',
+          'category',
+          'status',
+          'isRecurring',
+          'recurrencePattern',
+          'notes',
+          'attachments',
+          'reminderSent',
+          'sourceDocumentId',
+          'createdAt',
+          'updatedAt'
+        ])
+        && requiredString(data, 'title', 200)
+        && requiredNumber(data, 'amount')
+        && data.amount >= 0
+        && requiredString(data, 'currency', 8)
+        && requiredTimestamp(data, 'dueDate')
+        && requiredEnum(data, 'category', ['utilities', 'housing', 'insurance', 'credit-card', 'loan', 'other'])
+        && requiredEnum(data, 'status', ['paid', 'pending', 'overdue'])
+        && requiredBool(data, 'isRecurring')
+        && optionalEnum(data, 'recurrencePattern', ['monthly', 'quarterly', 'yearly'])
+        && optionalString(data, 'notes', 5000)
+        && optionalArray(data, 'attachments', 25)
+        && validReminderSent(data)
+        && optionalString(data, 'sourceDocumentId', 128)
+        && optionalTimestamp(data, 'createdAt')
+        && optionalTimestamp(data, 'updatedAt');
+    }
+
+    function validSubscription() {
+      let data = request.resource.data;
+      return noPrivilegeFields(data)
+        && data.keys().hasOnly([
+          'name',
+          'amount',
+          'currency',
+          'billingPeriod',
+          'nextRenewalDate',
+          'category',
+          'cancellationUrl',
+          'notes',
+          'reminderSent',
+          'sourceDocumentId',
+          'createdAt',
+          'updatedAt'
+        ])
+        && requiredString(data, 'name', 200)
+        && requiredNumber(data, 'amount')
+        && data.amount >= 0
+        && requiredString(data, 'currency', 8)
+        && requiredEnum(data, 'billingPeriod', ['monthly', 'yearly', 'quarterly'])
+        && requiredTimestamp(data, 'nextRenewalDate')
+        && requiredEnum(data, 'category', ['entertainment', 'work', 'health', 'utilities', 'shopping', 'other'])
+        && optionalString(data, 'cancellationUrl', 2048)
+        && optionalString(data, 'notes', 5000)
+        && validReminderSent(data)
+        && optionalString(data, 'sourceDocumentId', 128)
+        && optionalTimestamp(data, 'createdAt')
+        && optionalTimestamp(data, 'updatedAt');
+    }
+
+    function validWarranty() {
+      let data = request.resource.data;
+      return noPrivilegeFields(data)
+        && data.keys().hasOnly([
+          'productName',
+          'purchaseDate',
+          'warrantyDurationMonths',
+          'expirationDate',
+          'retailer',
+          'warrantyProvider',
+          'contactInfo',
+          'receiptUrl',
+          'warrantyCardUrl',
+          'notes',
+          'reminderSent',
+          'sourceDocumentId',
+          'createdAt',
+          'updatedAt'
+        ])
+        && requiredString(data, 'productName', 200)
+        && requiredTimestamp(data, 'purchaseDate')
+        && requiredNumber(data, 'warrantyDurationMonths')
+        && data.warrantyDurationMonths >= 0
+        && data.warrantyDurationMonths <= 1200
+        && requiredTimestamp(data, 'expirationDate')
+        && optionalString(data, 'retailer', 200)
+        && optionalString(data, 'warrantyProvider', 200)
+        && optionalString(data, 'contactInfo', 1000)
+        && optionalString(data, 'receiptUrl', 2048)
+        && optionalString(data, 'warrantyCardUrl', 2048)
+        && optionalString(data, 'notes', 5000)
+        && validReminderSent(data)
+        && optionalString(data, 'sourceDocumentId', 128)
+        && optionalTimestamp(data, 'createdAt')
+        && optionalTimestamp(data, 'updatedAt');
+    }
+
+    function validDocument() {
+      let data = request.resource.data;
+      return noPrivilegeFields(data)
+        && data.keys().hasOnly([
+          'title',
+          'type',
+          'section',
+          'documentNumber',
+          'issueDate',
+          'expirationDate',
+          'fileUrl',
+          'storagePath',
+          'fileName',
+          'fileSize',
+          'mimeType',
+          'detectedDates',
+          'reminderSent',
+          'parserStatus',
+          'reviewStatus',
+          'classificationConfidence',
+          'extractedText',
+          'extractedData',
+          'tags',
+          'sourceKind',
+          'createdAt',
+          'updatedAt',
+          'duplicateStatus',
+          'duplicateOfDocumentId',
+          'supersedesDocumentId',
+          'replacedByDocumentId'
+        ])
+        && requiredString(data, 'title', 300)
+        && requiredEnum(data, 'type', [
+          'passport',
+          'license',
+          'insurance',
+          'contract',
+          'invoice',
+          'receipt',
+          'statement',
+          'bill',
+          'challan',
+          'tax-document',
+          'warranty',
+          'password-export',
+          'reminder-note',
+          'other'
+        ])
+        && requiredEnum(data, 'section', [
+          'dashboard',
+          'bills',
+          'subscriptions',
+          'warranties',
+          'documents',
+          'passwords',
+          'reminders',
+          'others'
+        ])
+        && optionalString(data, 'documentNumber', 200)
+        && optionalTimestamp(data, 'issueDate')
+        && optionalTimestamp(data, 'expirationDate')
+        && requiredString(data, 'fileUrl', 4096)
+        && optionalString(data, 'storagePath', 1024)
+        && requiredString(data, 'fileName', 255)
+        && requiredNumber(data, 'fileSize')
+        && data.fileSize >= 0
+        && data.fileSize <= 52 * 1024 * 1024
+        && requiredString(data, 'mimeType', 160)
+        && optionalArray(data, 'detectedDates', 50)
+        && validReminderSent(data)
+        && optionalEnum(data, 'parserStatus', ['pending', 'parsed', 'partial', 'failed'])
+        && optionalEnum(data, 'reviewStatus', ['needs_review', 'reviewed', 'finalized'])
+        && optionalNumber(data, 'classificationConfidence')
+        && (!('classificationConfidence' in data) || (data.classificationConfidence >= 0 && data.classificationConfidence <= 1))
+        && optionalString(data, 'extractedText', 250000)
+        && optionalMap(data, 'extractedData')
+        && optionalArray(data, 'tags', 50)
+        && optionalEnum(data, 'sourceKind', ['manual', 'upload'])
+        && optionalTimestamp(data, 'createdAt')
+        && optionalTimestamp(data, 'updatedAt')
+        && optionalEnum(data, 'duplicateStatus', ['exact', 'likely', 'possible'])
+        && optionalString(data, 'duplicateOfDocumentId', 128)
+        && optionalString(data, 'supersedesDocumentId', 128)
+        && optionalString(data, 'replacedByDocumentId', 128);
+    }
+
+    function validPassword() {
+      let data = request.resource.data;
+      return noPrivilegeFields(data)
+        && data.keys().hasOnly([
+          'serviceName',
+          'serviceUrl',
+          'username',
+          'password',
+          'category',
+          'strength',
+          'lastChanged',
+          'notes',
+          'createdAt',
+          'updatedAt'
+        ])
+        && requiredString(data, 'serviceName', 200)
+        && optionalString(data, 'serviceUrl', 2048)
+        && optionalString(data, 'username', 320)
+        && requiredString(data, 'password', 4096)
+        && requiredEnum(data, 'category', ['social', 'finance', 'work', 'shopping', 'entertainment', 'other'])
+        && requiredEnum(data, 'strength', ['weak', 'fair', 'strong', 'very-strong'])
+        && requiredTimestamp(data, 'lastChanged')
+        && optionalString(data, 'notes', 5000)
+        && optionalTimestamp(data, 'createdAt')
+        && optionalTimestamp(data, 'updatedAt');
+    }
+
+    function validReminder() {
+      let data = request.resource.data;
+      return noPrivilegeFields(data)
+        && data.keys().hasOnly([
+          'title',
+          'description',
+          'dueDate',
+          'priority',
+          'category',
+          'status',
+          'isRecurring',
+          'recurrencePattern',
+          'relatedItemType',
+          'relatedItemId',
+          'reminderSent',
+          'sourceDocumentId',
+          'autoGenerated',
+          'autoGeneratedKind',
+          'targetDate',
+          'pushSentAt',
+          'createdAt',
+          'updatedAt'
+        ])
+        && requiredString(data, 'title', 200)
+        && optionalString(data, 'description', 5000)
+        && requiredTimestamp(data, 'dueDate')
+        && requiredEnum(data, 'priority', ['high', 'medium', 'low'])
+        && requiredEnum(data, 'category', ['health', 'finance', 'personal', 'work', 'other'])
+        && requiredEnum(data, 'status', ['pending', 'completed', 'snoozed'])
+        && requiredBool(data, 'isRecurring')
+        && optionalEnum(data, 'recurrencePattern', ['daily', 'weekly', 'monthly', 'yearly'])
+        && optionalEnum(data, 'relatedItemType', ['bill', 'subscription', 'warranty', 'document'])
+        && optionalString(data, 'relatedItemId', 128)
+        && validReminderSent(data)
+        && optionalString(data, 'sourceDocumentId', 128)
+        && optionalBool(data, 'autoGenerated')
+        && optionalEnum(data, 'autoGeneratedKind', [
+          '30_day_before',
+          '7_day_before',
+          '1_day_before',
+          '3_day_before',
+          'day_of',
+          '1_day_after',
+          'overdue'
+        ])
+        && optionalTimestamp(data, 'targetDate')
+        && optionalTimestamp(data, 'pushSentAt')
+        && optionalTimestamp(data, 'createdAt')
+        && optionalTimestamp(data, 'updatedAt');
+    }
+
+    function validNotification() {
+      let data = request.resource.data;
+      return noPrivilegeFields(data)
+        && data.keys().hasOnly([
+          'type',
+          'title',
+          'message',
+          'relatedItemType',
+          'relatedItemId',
+          'read',
+          'createdAt'
+        ])
+        && requiredEnum(data, 'type', ['reminder', 'alert', 'info'])
+        && requiredString(data, 'title', 200)
+        && requiredString(data, 'message', 1000)
+        && optionalString(data, 'relatedItemType', 80)
+        && optionalString(data, 'relatedItemId', 128)
+        && requiredBool(data, 'read')
+        && optionalTimestamp(data, 'createdAt');
+    }
+
+    function validNotificationDevice(deviceId) {
+      let data = request.resource.data;
+      return noPrivilegeFields(data)
+        && data.keys().hasOnly([
+          'id',
+          'token',
+          'platform',
+          'notificationsEnabled',
+          'userAgent',
+          'language',
+          'createdAt',
+          'updatedAt',
+          'lastSeenAt'
+        ])
+        && data.id == deviceId
+        && requiredString(data, 'token', 4096)
+        && requiredEnum(data, 'platform', ['web'])
+        && requiredBool(data, 'notificationsEnabled')
+        && optionalString(data, 'userAgent', 1024)
+        && optionalString(data, 'language', 64)
+        && optionalTimestamp(data, 'createdAt')
+        && optionalTimestamp(data, 'updatedAt')
+        && optionalTimestamp(data, 'lastSeenAt');
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && validUserDoc(userId);
+      allow update: if isOwner(userId)
+        && validUserDoc(userId)
+        && changedKeys().hasOnly(['settings', 'updatedAt', 'masterPasswordHash'])
+        && unchangedCreateTimestamp();
+      allow delete: if false;
+
+      match /bills/{billId} {
+        allow read, delete: if isOwner(userId);
+        allow create: if isOwner(userId) && validBill();
+        allow update: if isOwner(userId) && validBill() && unchangedCreateTimestamp();
+      }
+
+      match /subscriptions/{subscriptionId} {
+        allow read, delete: if isOwner(userId);
+        allow create: if isOwner(userId) && validSubscription();
+        allow update: if isOwner(userId) && validSubscription() && unchangedCreateTimestamp();
+      }
+
+      match /warranties/{warrantyId} {
+        allow read, delete: if isOwner(userId);
+        allow create: if isOwner(userId) && validWarranty();
+        allow update: if isOwner(userId) && validWarranty() && unchangedCreateTimestamp();
+      }
+
+      match /documents/{documentId} {
+        allow read, delete: if isOwner(userId);
+        allow create: if isOwner(userId) && validDocument();
+        allow update: if isOwner(userId) && validDocument() && unchangedCreateTimestamp();
+      }
+
+      match /passwords/{passwordId} {
+        allow read, delete: if isOwner(userId);
+        allow create: if isOwner(userId) && validPassword();
+        allow update: if isOwner(userId) && validPassword() && unchangedCreateTimestamp();
+      }
+
+      match /reminders/{reminderId} {
+        allow read, delete: if isOwner(userId);
+        allow create: if isOwner(userId) && validReminder();
+        allow update: if isOwner(userId) && validReminder() && unchangedCreateTimestamp();
+      }
+
+      match /notifications/{notificationId} {
+        allow read, delete: if isOwner(userId);
+        allow create: if isOwner(userId) && validNotification();
+        allow update: if isOwner(userId)
+          && validNotification()
+          && changedKeys().hasOnly(['read'])
+          && unchangedCreateTimestamp();
+      }
+
+      match /notificationDevices/{deviceId} {
+        allow read, delete: if isOwner(userId);
+        allow create, update: if isOwner(userId) && validNotificationDevice(deviceId);
+      }
+    }
+  }
+}

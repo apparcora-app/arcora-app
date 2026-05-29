@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1754" viewBox="0 0 1240 1754">
+  <rect width="1240" height="1754" fill="#ffffff"/>
+  <rect x="40" y="40" width="1160" height="1674" rx="24" fill="#ffffff" stroke="#0f172a" stroke-width="3"/>
+  <text x="620" y="110" text-anchor="middle" font-family="Arial" font-size="24" fill="#b91c1c" font-weight="700">SAMPLE / TEST DOCUMENT</text>
+  <text x="620" y="160" text-anchor="middle" font-family="Arial" font-size="36" fill="#0f172a" font-weight="700">UFONE</text>
+  <text x="620" y="205" text-anchor="middle" font-family="Arial" font-size="28" fill="#0f172a" font-weight="700">POSTPAID MONTHLY BILL</text>
+  <rect x="70" y="245" width="1100" height="110" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="95" y="285" font-family="Arial" font-size="22" fill="#c2410c" font-weight="700">MOBILE NO</text>
+  <text x="315" y="285" font-family="Arial" font-size="22" fill="#c2410c" font-weight="700">BILL NO</text>
+  <text x="535" y="285" font-family="Arial" font-size="22" fill="#c2410c" font-weight="700">BILL DATE</text>
+  <text x="755" y="285" font-family="Arial" font-size="22" fill="#c2410c" font-weight="700">DUE DATE</text>
+  <text x="975" y="285" font-family="Arial" font-size="22" fill="#c2410c" font-weight="700">ACCOUNT ID</text>
+  <text x="95" y="330" font-family="Arial" font-size="24" fill="#111827">0333-1234567</text>
+  <text x="315" y="330" font-family="Arial" font-size="24" fill="#111827">PB-2026-9912</text>
+  <text x="535" y="330" font-family="Arial" font-size="24" fill="#111827">04/09/2026</text>
+  <text x="755" y="330" font-family="Arial" font-size="24" fill="#111827">19/09/2026</text>
+  <text x="975" y="330" font-family="Arial" font-size="24" fill="#111827">UF-99810021</text>
+  <rect x="70" y="390" width="1100" height="220" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="95" y="435" font-family="Arial" font-size="22" fill="#334155" font-weight="700">CUSTOMER PROFILE</text>
+  <text x="95" y="480" font-family="Arial" font-size="21" fill="#111827">Customer Name: SAMPLE USER</text>
+  <text x="95" y="520" font-family="Arial" font-size="21" fill="#111827">Plan Name: UPower 1500</text>
+  <text x="95" y="560" font-family="Arial" font-size="21" fill="#111827">Billing Cycle: Monthly</text>
+  <rect x="70" y="650" width="1100" height="420" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="95" y="695" font-family="Arial" font-size="22" fill="#334155" font-weight="700">USAGE AND CHARGES</text>
+  <text x="95" y="750" font-family="Arial" font-size="21" fill="#111827">Monthly Line Rent</text>
+  <text x="1050" y="750" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">1,500</text>
+  <text x="95" y="800" font-family="Arial" font-size="21" fill="#111827">Additional Voice / Data Usage</text>
+  <text x="1050" y="800" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">420</text>
+  <text x="95" y="850" font-family="Arial" font-size="21" fill="#111827">Sales Tax</text>
+  <text x="1050" y="850" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">346</text>
+  <text x="95" y="900" font-family="Arial" font-size="21" fill="#111827">Withholding Tax</text>
+  <text x="1050" y="900" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">150</text>
+  <line x1="70" y1="940" x2="1170" y2="940" stroke="#94a3b8"/>
+  <text x="95" y="995" font-family="Arial" font-size="24" fill="#111827" font-weight="700">CURRENT BILL</text>
+  <text x="1050" y="995" text-anchor="end" font-family="Arial" font-size="24" fill="#111827" font-weight="700">2,416</text>
+  <rect x="70" y="1110" width="1100" height="190" fill="#ffedd5" stroke="#f97316" stroke-width="2"/>
+  <text x="95" y="1160" font-family="Arial" font-size="22" fill="#9a3412" font-weight="700">PAYMENT SUMMARY</text>
+  <text x="95" y="1220" font-family="Arial" font-size="32" fill="#111827" font-weight="700">AMOUNT PAYABLE</text>
+  <text x="1085" y="1220" text-anchor="end" font-family="Arial" font-size="34" fill="#111827" font-weight="700">2,416</text>
+  <text x="620" y="1620" text-anchor="middle" font-family="Arial" font-size="22" fill="#64748b">Synthetic sample for parser and OCR testing only</text>
+  <text x="620" y="1660" text-anchor="middle" font-family="Arial" font-size="18" fill="#64748b">No real customer data. No payment validity.</text>
+</svg>

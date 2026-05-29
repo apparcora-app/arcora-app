@@ -1,0 +1,12 @@
+node_modules
+dist
+.env
+.env.*
+build_errors.txt
+build_errors2_cmd.txt
+build_errors_cmd.txt
+service-account.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1754" viewBox="0 0 1240 1754">
+  <rect width="1240" height="1754" fill="#ffffff"/>
+  <rect x="40" y="40" width="1160" height="1674" rx="24" fill="#ffffff" stroke="#0f172a" stroke-width="3"/>
+  <text x="620" y="110" text-anchor="middle" font-family="Arial" font-size="24" fill="#b91c1c" font-weight="700">SAMPLE / TEST DOCUMENT</text>
+  <text x="620" y="160" text-anchor="middle" font-family="Arial" font-size="36" fill="#0f172a" font-weight="700">FAISALABAD ELECTRIC SUPPLY COMPANY</text>
+  <text x="620" y="200" text-anchor="middle" font-family="Arial" font-size="26" fill="#0f172a" font-weight="700">ELECTRICITY CONSUMER BILL</text>
+  <rect x="70" y="230" width="1100" height="90" fill="#eff6ff" stroke="#2563eb"/>
+  <text x="95" y="270" font-family="Arial" font-size="22" fill="#1d4ed8" font-weight="700">BILL MONTH</text>
+  <text x="285" y="270" font-family="Arial" font-size="22" fill="#1d4ed8" font-weight="700">ISSUE DATE</text>
+  <text x="475" y="270" font-family="Arial" font-size="22" fill="#1d4ed8" font-weight="700">DUE DATE</text>
+  <text x="665" y="270" font-family="Arial" font-size="22" fill="#1d4ed8" font-weight="700">REFERENCE NO</text>
+  <text x="960" y="270" font-family="Arial" font-size="22" fill="#1d4ed8" font-weight="700">CONSUMER ID</text>
+  <text x="95" y="305" font-family="Arial" font-size="24" fill="#111827">Sep 2026</text>
+  <text x="285" y="305" font-family="Arial" font-size="24" fill="#111827">01/09/2026</text>
+  <text x="475" y="305" font-family="Arial" font-size="24" fill="#111827">18/09/2026</text>
+  <text x="665" y="305" font-family="Arial" font-size="24" fill="#111827">10 23456 78901</text>
+  <text x="960" y="305" font-family="Arial" font-size="24" fill="#111827">0415488099</text>
+  <rect x="70" y="350" width="540" height="230" fill="#f8fafc" stroke="#cbd5e1"/>
+  <rect x="630" y="350" width="540" height="230" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="95" y="390" font-family="Arial" font-size="22" fill="#334155" font-weight="700">CUSTOMER DETAILS</text>
+  <text x="95" y="435" font-family="Arial" font-size="21" fill="#111827">Name of Consumer: SAMPLE USER</text>
+  <text x="95" y="470" font-family="Arial" font-size="21" fill="#111827">Address: House 18, Canal Road, Faisalabad</text>
+  <text x="95" y="505" font-family="Arial" font-size="21" fill="#111827">Tariff: A-1(b) General Supply</text>
+  <text x="95" y="540" font-family="Arial" font-size="21" fill="#111827">Meter No: 1467108</text>
+  <text x="655" y="390" font-family="Arial" font-size="22" fill="#334155" font-weight="700">METER READING</text>
+  <text x="655" y="435" font-family="Arial" font-size="21" fill="#111827">Previous Reading: 21580</text>
+  <text x="655" y="470" font-family="Arial" font-size="21" fill="#111827">Present Reading: 22045</text>
+  <text x="655" y="505" font-family="Arial" font-size="21" fill="#111827">Units Consumed: 465</text>
+  <text x="655" y="540" font-family="Arial" font-size="21" fill="#111827">Connected Load: 2.00 kW</text>
+  <rect x="70" y="620" width="1100" height="460" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="95" y="665" font-family="Arial" font-size="22" fill="#334155" font-weight="700">CHARGES BREAKDOWN</text>
+  <line x1="70" y1="700" x2="1170" y2="700" stroke="#cbd5e1"/>
+  <text x="95" y="740" font-family="Arial" font-size="21" fill="#111827">Cost of Electricity</text>
+  <text x="1050" y="740" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">9,954</text>
+  <text x="95" y="785" font-family="Arial" font-size="21" fill="#111827">Fixed Charges</text>
+  <text x="1050" y="785" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">1,000</text>
+  <text x="95" y="830" font-family="Arial" font-size="21" fill="#111827">Electricity Duty</text>
+  <text x="1050" y="830" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">149</text>
+  <text x="95" y="875" font-family="Arial" font-size="21" fill="#111827">GST</text>
+  <text x="1050" y="875" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">2,068</text>
+  <text x="95" y="920" font-family="Arial" font-size="21" fill="#111827">Quarter Tariff Adj / DMC</text>
+  <text x="1050" y="920" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">648</text>
+  <line x1="70" y1="950" x2="1170" y2="950" stroke="#94a3b8"/>
+  <text x="95" y="995" font-family="Arial" font-size="24" fill="#111827" font-weight="700">TOTAL CURRENT BILL</text>
+  <text x="1050" y="995" text-anchor="end" font-family="Arial" font-size="24" fill="#111827" font-weight="700">13,819</text>
+  <rect x="70" y="1120" width="1100" height="220" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="95" y="1170" font-family="Arial" font-size="22" fill="#92400e" font-weight="700">PAYMENT SUMMARY</text>
+  <text x="95" y="1225" font-family="Arial" font-size="30" fill="#111827" font-weight="700">PAYABLE WITHIN DUE DATE</text>
+  <text x="1085" y="1225" text-anchor="end" font-family="Arial" font-size="32" fill="#111827" font-weight="700">13,819</text>
+  <text x="95" y="1285" font-family="Arial" font-size="30" fill="#991b1b" font-weight="700">L.P. SURCHARGE</text>
+  <text x="1085" y="1285" text-anchor="end" font-family="Arial" font-size="32" fill="#991b1b" font-weight="700">1,120</text>
+  <text x="95" y="1335" font-family="Arial" font-size="32" fill="#991b1b" font-weight="700">PAYABLE AFTER DUE DATE</text>
+  <text x="1085" y="1335" text-anchor="end" font-family="Arial" font-size="34" fill="#991b1b" font-weight="700">14,939</text>
+  <text x="620" y="1620" text-anchor="middle" font-family="Arial" font-size="22" fill="#64748b">Synthetic sample for parser and OCR testing only</text>
+  <text x="620" y="1660" text-anchor="middle" font-family="Arial" font-size="18" fill="#64748b">No real customer data. No payment validity.</text>
+</svg>

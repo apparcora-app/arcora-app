@@ -1,0 +1,2 @@
+src/parsers/pdfParser.ts(5,24): error TS2349: This expression is not callable.
+  Type 'typeof import("E:/Personal Data/Apps/Life Os - Full Stack App/backend/cloud-run-worker/node_modules/pdf-parse/dist/pdf-parse/cjs/index")' has no call signatures.

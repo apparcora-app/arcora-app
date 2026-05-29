@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1754" viewBox="0 0 1240 1754">
+  <rect width="1240" height="1754" fill="#ffffff"/>
+  <rect x="40" y="40" width="1160" height="1674" rx="24" fill="#ffffff" stroke="#0f172a" stroke-width="3"/>
+  <text x="620" y="110" text-anchor="middle" font-family="Arial" font-size="24" fill="#b91c1c" font-weight="700">SAMPLE / TEST DOCUMENT</text>
+  <text x="620" y="160" text-anchor="middle" font-family="Arial" font-size="36" fill="#0f172a" font-weight="700">SUI NORTHERN GAS PIPELINES LIMITED</text>
+  <text x="620" y="200" text-anchor="middle" font-family="Arial" font-size="26" fill="#0f172a" font-weight="700">DOMESTIC GAS BILL</text>
+  <rect x="70" y="230" width="1100" height="110" fill="#ecfeff" stroke="#0891b2"/>
+  <text x="95" y="270" font-family="Arial" font-size="22" fill="#0f766e" font-weight="700">CONSUMER NO</text>
+  <text x="295" y="270" font-family="Arial" font-size="22" fill="#0f766e" font-weight="700">BILL MONTH</text>
+  <text x="495" y="270" font-family="Arial" font-size="22" fill="#0f766e" font-weight="700">ISSUE DATE</text>
+  <text x="695" y="270" font-family="Arial" font-size="22" fill="#0f766e" font-weight="700">DUE DATE</text>
+  <text x="895" y="270" font-family="Arial" font-size="22" fill="#0f766e" font-weight="700">METER NO</text>
+  <text x="95" y="320" font-family="Arial" font-size="24" fill="#111827">60012345678</text>
+  <text x="295" y="320" font-family="Arial" font-size="24" fill="#111827">Sep 2026</text>
+  <text x="495" y="320" font-family="Arial" font-size="24" fill="#111827">05/09/2026</text>
+  <text x="695" y="320" font-family="Arial" font-size="24" fill="#111827">20/09/2026</text>
+  <text x="895" y="320" font-family="Arial" font-size="24" fill="#111827">SG-114420</text>
+  <rect x="70" y="370" width="1100" height="250" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="95" y="415" font-family="Arial" font-size="22" fill="#334155" font-weight="700">CUSTOMER / CONNECTION</text>
+  <text x="95" y="460" font-family="Arial" font-size="21" fill="#111827">Name: SAMPLE CONSUMER</text>
+  <text x="95" y="500" font-family="Arial" font-size="21" fill="#111827">Address: Street 7, Satellite Town, Lahore</text>
+  <text x="95" y="540" font-family="Arial" font-size="21" fill="#111827">Connection Type: Domestic</text>
+  <text x="95" y="580" font-family="Arial" font-size="21" fill="#111827">Billing Period: 01/08/2026 to 31/08/2026</text>
+  <text x="650" y="460" font-family="Arial" font-size="21" fill="#111827">Previous Reading: 1280</text>
+  <text x="650" y="500" font-family="Arial" font-size="21" fill="#111827">Current Reading: 1338</text>
+  <text x="650" y="540" font-family="Arial" font-size="21" fill="#111827">Consumed Hm3: 58</text>
+  <text x="650" y="580" font-family="Arial" font-size="21" fill="#111827">Pressure Factor: 1.00</text>
+  <rect x="70" y="660" width="1100" height="390" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="95" y="705" font-family="Arial" font-size="22" fill="#334155" font-weight="700">CHARGES</text>
+  <text x="95" y="760" font-family="Arial" font-size="21" fill="#111827">Gas Charges</text>
+  <text x="1050" y="760" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">2,940</text>
+  <text x="95" y="810" font-family="Arial" font-size="21" fill="#111827">Meter Rent</text>
+  <text x="1050" y="810" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">40</text>
+  <text x="95" y="860" font-family="Arial" font-size="21" fill="#111827">GST</text>
+  <text x="1050" y="860" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">515</text>
+  <text x="95" y="910" font-family="Arial" font-size="21" fill="#111827">Fixed Charges</text>
+  <text x="1050" y="910" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">350</text>
+  <line x1="70" y1="950" x2="1170" y2="950" stroke="#94a3b8"/>
+  <text x="95" y="1000" font-family="Arial" font-size="24" fill="#111827" font-weight="700">CURRENT BILL</text>
+  <text x="1050" y="1000" text-anchor="end" font-family="Arial" font-size="24" fill="#111827" font-weight="700">3,845</text>
+  <rect x="70" y="1090" width="1100" height="230" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="95" y="1140" font-family="Arial" font-size="22" fill="#166534" font-weight="700">AMOUNT SUMMARY</text>
+  <text x="95" y="1200" font-family="Arial" font-size="30" fill="#111827" font-weight="700">PAYABLE WITHIN DUE DATE</text>
+  <text x="1085" y="1200" text-anchor="end" font-family="Arial" font-size="32" fill="#111827" font-weight="700">3,845</text>
+  <text x="95" y="1270" font-family="Arial" font-size="30" fill="#991b1b" font-weight="700">PAYABLE AFTER DUE DATE</text>
+  <text x="1085" y="1270" text-anchor="end" font-family="Arial" font-size="34" fill="#991b1b" font-weight="700">4,010</text>
+  <text x="620" y="1620" text-anchor="middle" font-family="Arial" font-size="22" fill="#64748b">Synthetic sample for parser and OCR testing only</text>
+  <text x="620" y="1660" text-anchor="middle" font-family="Arial" font-size="18" fill="#64748b">No real customer data. No payment validity.</text>
+</svg>

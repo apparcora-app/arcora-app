@@ -1,0 +1,80 @@
+{
+  "version": "1.0.0",
+  "global_policy": {
+    "safe": [
+      "list_dir",
+      "view_file",
+      "grep_search",
+      "read_resource",
+      "list_resources",
+      "list_permissions",
+      "read_url_content",
+      "search_web"
+    ],
+    "sensitive": [
+      "write_to_file",
+      "replace_file_content",
+      "multi_replace_file_content",
+      "run_command",
+      "ask_permission",
+      "schedule",
+      "send_message",
+      "define_subagent",
+      "invoke_subagent",
+      "manage_subagents",
+      "manage_task"
+    ],
+    "restricted": [
+      "delete_file",
+      "rmdir",
+      "format_disk"
+    ]
+  },
+  "agents": {
+    "arcora_auditor": {
+      "description": "Read-only Arcora auditor for finding bugs, lag, performance issues, broken imports, Firebase problems, routing issues, and UI problems before any code changes.",
+      "allowed_tiers": ["safe"],
+      "blocked_tools": ["delete_file", "run_command", "write_to_file", "replace_file_content", "multi_replace_file_content"],
+      "governance": {
+        "sandbox_mode": "read-only"
+      }
+    },
+    "arcora_fixer": {
+      "description": "Implementation agent for safe, focused Arcora fixes after bugs are confirmed.",
+      "allowed_tiers": ["safe", "sensitive"],
+      "blocked_tools": ["delete_file"],
+      "governance": {
+        "sandbox_mode": "workspace-write"
+      }
+    },
+    "arcora_reviewer": {
+      "description": "Read-only reviewer for checking Arcora code changes before accepting them.",
+      "allowed_tiers": ["safe"],
+      "blocked_tools": ["delete_file", "run_command", "write_to_file", "replace_file_content", "multi_replace_file_content"],
+      "governance": {
+        "sandbox_mode": "read-only"
+      }
+    },
+    "firebase_guardian": {
+      "description": "Read-only Firebase/Auth/Firestore/Storage security and data-safety reviewer for Arcora.",
+      "allowed_tiers": ["safe"],
+      "blocked_tools": ["delete_file", "run_command", "write_to_file", "replace_file_content", "multi_replace_file_content"],
+      "governance": {
+        "sandbox_mode": "read-only"
+      }
+    },
+    "launch_ops": {
+      "description": "Launch, deployment, analytics, SEO, onboarding, and public operations planner for Arcora.",
+      "allowed_tiers": ["safe"],
+      "blocked_tools": ["delete_file", "run_command", "write_to_file", "replace_file_content", "multi_replace_file_content"],
+      "governance": {
+        "sandbox_mode": "read-only"
+      }
+    }
+  },
+  "constraints": {
+    "max_deletion_count": 0,
+    "allow_network_access": true,
+    "workspace_scope_only": true
+  }
+}

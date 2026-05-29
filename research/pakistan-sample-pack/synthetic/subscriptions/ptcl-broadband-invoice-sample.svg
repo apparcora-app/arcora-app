@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1754" viewBox="0 0 1240 1754">
+  <rect width="1240" height="1754" fill="#ffffff"/>
+  <rect x="40" y="40" width="1160" height="1674" rx="24" fill="#ffffff" stroke="#0f172a" stroke-width="3"/>
+  <text x="620" y="110" text-anchor="middle" font-family="Arial" font-size="24" fill="#b91c1c" font-weight="700">SAMPLE / TEST DOCUMENT</text>
+  <text x="620" y="160" text-anchor="middle" font-family="Arial" font-size="36" fill="#0f172a" font-weight="700">PTCL</text>
+  <text x="620" y="205" text-anchor="middle" font-family="Arial" font-size="28" fill="#0f172a" font-weight="700">BROADBAND AND LANDLINE MONTHLY INVOICE</text>
+  <rect x="70" y="245" width="1100" height="110" fill="#eef2ff" stroke="#4f46e5"/>
+  <text x="95" y="285" font-family="Arial" font-size="22" fill="#4338ca" font-weight="700">ACCOUNT ID</text>
+  <text x="315" y="285" font-family="Arial" font-size="22" fill="#4338ca" font-weight="700">INVOICE NO</text>
+  <text x="535" y="285" font-family="Arial" font-size="22" fill="#4338ca" font-weight="700">BILL DATE</text>
+  <text x="755" y="285" font-family="Arial" font-size="22" fill="#4338ca" font-weight="700">DUE DATE</text>
+  <text x="975" y="285" font-family="Arial" font-size="22" fill="#4338ca" font-weight="700">PHONE NO</text>
+  <text x="95" y="330" font-family="Arial" font-size="24" fill="#111827">ACC-778291</text>
+  <text x="315" y="330" font-family="Arial" font-size="24" fill="#111827">INV-SEP-2026-8821</text>
+  <text x="535" y="330" font-family="Arial" font-size="24" fill="#111827">03/09/2026</text>
+  <text x="755" y="330" font-family="Arial" font-size="24" fill="#111827">18/09/2026</text>
+  <text x="975" y="330" font-family="Arial" font-size="24" fill="#111827">042-35677821</text>
+  <rect x="70" y="390" width="1100" height="210" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="95" y="435" font-family="Arial" font-size="22" fill="#334155" font-weight="700">CUSTOMER DETAILS</text>
+  <text x="95" y="480" font-family="Arial" font-size="21" fill="#111827">Customer Name: SAMPLE USER</text>
+  <text x="95" y="520" font-family="Arial" font-size="21" fill="#111827">Billing Address: Flat 4B, Gulberg, Lahore</text>
+  <text x="95" y="560" font-family="Arial" font-size="21" fill="#111827">Package: Flash Fiber 50 Mbps + Voice</text>
+  <rect x="70" y="640" width="1100" height="420" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="95" y="685" font-family="Arial" font-size="22" fill="#334155" font-weight="700">SERVICE CHARGES</text>
+  <text x="95" y="740" font-family="Arial" font-size="21" fill="#111827">Broadband Monthly Charges</text>
+  <text x="1050" y="740" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">2,999</text>
+  <text x="95" y="790" font-family="Arial" font-size="21" fill="#111827">Voice Line Charges</text>
+  <text x="1050" y="790" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">350</text>
+  <text x="95" y="840" font-family="Arial" font-size="21" fill="#111827">Sales Tax</text>
+  <text x="1050" y="840" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">603</text>
+  <text x="95" y="890" font-family="Arial" font-size="21" fill="#111827">Adjustment</text>
+  <text x="1050" y="890" text-anchor="end" font-family="Arial" font-size="21" fill="#111827">0</text>
+  <line x1="70" y1="930" x2="1170" y2="930" stroke="#94a3b8"/>
+  <text x="95" y="985" font-family="Arial" font-size="24" fill="#111827" font-weight="700">AMOUNT DUE</text>
+  <text x="1050" y="985" text-anchor="end" font-family="Arial" font-size="24" fill="#111827" font-weight="700">3,952</text>
+  <rect x="70" y="1100" width="1100" height="200" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="95" y="1150" font-family="Arial" font-size="22" fill="#5b21b6" font-weight="700">PAYMENT STATUS</text>
+  <text x="95" y="1210" font-family="Arial" font-size="32" fill="#111827" font-weight="700">PAYABLE BY DUE DATE</text>
+  <text x="1085" y="1210" text-anchor="end" font-family="Arial" font-size="34" fill="#111827" font-weight="700">3,952</text>
+  <text x="95" y="1270" font-family="Arial" font-size="24" fill="#334155">Subscription Type: Monthly recurring service invoice</text>
+  <text x="620" y="1620" text-anchor="middle" font-family="Arial" font-size="22" fill="#64748b">Synthetic sample for parser and OCR testing only</text>
+  <text x="620" y="1660" text-anchor="middle" font-family="Arial" font-size="18" fill="#64748b">No real customer data. No payment validity.</text>
+</svg>

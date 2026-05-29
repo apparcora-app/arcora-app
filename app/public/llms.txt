@@ -1,0 +1,38 @@
+# Arcora
+
+> Arcora is a secure life admin dashboard for organizing household records, bills, subscriptions, warranties, documents, passwords, reminders, deadlines, and important dates.
+
+Arcora is a web application for private household admin and personal record organization. Production builds generate this file with absolute URLs from `VITE_PUBLIC_SITE_URL`.
+
+## Product Summary
+
+- Product category: secure life admin dashboard.
+- Primary use: organize household records and deadlines in one account-based workspace.
+- Core modules: bills, subscriptions, warranties, documents, passwords, reminders, and dashboard review.
+- Access: public pages invite users to start a free account. Arcora does not publish paid pricing or plan-limit details on these public pages.
+- Support contact: app.arcora@gmail.com.
+
+## Main Public Pages
+
+- [Arcora homepage](/): Secure life admin dashboard for household records, bills, subscriptions, warranties, documents, passwords, reminders, and important dates.
+- [Bill reminder app](/bill-reminder-app): Feature page for tracking household bill due dates, recurring payments, payment notes, reminders, and supporting documents.
+- [Subscription tracker](/subscription-tracker): Feature page for tracking active subscriptions, renewal dates, recurring charges, cancellation notes, and related records.
+- [Warranty tracker](/warranty-tracker): Feature page for organizing product details, purchase records, warranty expiration dates, receipts, and coverage reminders.
+- [Personal document organizer](/personal-document-organizer): Feature page for organizing household documents, statements, receipts, warranty files, detected dates, notes, and reminders.
+- [Important date reminder app](/important-date-reminder-app): Feature page for reminders tied to bills, renewals, warranties, document dates, and household deadlines.
+- [Password organizer](/password-organizer): Feature page for organizing household account records, encrypted saved password values, recovery files, linked websites, and review notes.
+- [Household management app](/household-management-app): Feature page for the broader household admin system across bills, subscriptions, warranties, documents, passwords, and reminders.
+
+## Trust, Support, and Legal Pages
+
+- [Security overview](/security): Explains account access, user-scoped records, document storage, password handling, data ownership, deletion and export support, and contact paths.
+- [About Arcora](/about): Explains what Arcora is, why it exists, and how it helps organize private life admin records.
+- [Contact Arcora](/contact): Support page for account help, privacy requests, deletion requests, bug reports, complaints, and product questions.
+- [Privacy Policy](/privacy): Explains what Arcora stores, how information is used, storage providers, documents, password records, deletion requests, and privacy contact.
+- [Terms of Use](/terms): Explains user responsibilities, content ownership, sensitive records, responsible use, availability, deletion support, and contact.
+
+## Structured Data Notes
+
+- Public marketing pages include Organization, WebSite, SoftwareApplication, BreadcrumbList, and visible FAQPage schema where FAQ content is shown on the page.
+- Arcora does not publish ratings, reviews, awards, customer counts, or paid pricing claims in structured data.
+- Production canonical, sitemap, robots, and llms.txt URLs are controlled by `VITE_PUBLIC_SITE_URL`.

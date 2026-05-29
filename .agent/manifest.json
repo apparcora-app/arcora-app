@@ -1,0 +1,20 @@
+{
+  "protocol_version": "1.0.0",
+  "workspace_name": "Life OS - Full Stack App",
+  "description": "Unified Antigravity Workspace Local Intelligence Layer",
+  "initialized_at": "2026-05-24T11:17:07-04:00",
+  "active_profiles": {
+    "skills_directory": ".agent/skills",
+    "governance_config": ".agent/tools.json",
+    "instructions_directory": ".agent/instructions",
+    "scripts_directory": ".agent/scripts"
+  },
+  "modules": {
+    "total_skills": 44,
+    "total_agents": 5
+  },
+  "compatibility": {
+    "engine": "Antigravity-v2.0",
+    "legacy_framework": "Codex"
+  }
+}

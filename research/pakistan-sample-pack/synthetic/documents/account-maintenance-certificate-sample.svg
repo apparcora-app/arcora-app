@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="1754" viewBox="0 0 1240 1754">
+  <rect width="1240" height="1754" fill="#ffffff"/>
+  <rect x="60" y="60" width="1120" height="1634" rx="28" fill="#ffffff" stroke="#0f172a" stroke-width="3"/>
+  <text x="620" y="120" text-anchor="middle" font-family="Arial" font-size="24" fill="#b91c1c" font-weight="700">SAMPLE / TEST DOCUMENT</text>
+  <text x="120" y="175" font-family="Arial" font-size="20" fill="#111827">Reference #: AMC-2026-88291</text>
+  <text x="880" y="175" font-family="Arial" font-size="20" fill="#111827">Date of Issue: 16 Sept 2026</text>
+  <text x="620" y="260" text-anchor="middle" font-family="Arial" font-size="34" fill="#0f172a" font-weight="700">ACCOUNT MAINTENANCE CERTIFICATE</text>
+  <text x="120" y="340" font-family="Arial" font-size="22" fill="#111827">This is to certify that Mr./Ms. SAMPLE USER is maintaining his/her account with Arcora Allied Test Bank Ltd.</text>
+  <text x="120" y="378" font-family="Arial" font-size="22" fill="#111827">Satellite Town Branch (PK0010648) as per below mentioned details:</text>
+  <rect x="110" y="430" width="1020" height="700" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="500" y1="430" x2="500" y2="1130" stroke="#94a3b8" stroke-width="2"/>
+  <g font-family="Arial" font-size="22" fill="#111827">
+    <text x="135" y="490">Title of Account</text><text x="530" y="490">SAMPLE USER</text>
+    <line x1="110" y1="520" x2="1130" y2="520" stroke="#cbd5e1"/>
+    <text x="135" y="570">Account No / IBAN</text><text x="530" y="570">PK22 ARCO 1000 1234 5678 9012</text>
+    <line x1="110" y1="600" x2="1130" y2="600" stroke="#cbd5e1"/>
+    <text x="135" y="650">Date of Account Opening</text><text x="530" y="650">28-Mar-2022</text>
+    <line x1="110" y1="680" x2="1130" y2="680" stroke="#cbd5e1"/>
+    <text x="135" y="730">Currency of Account</text><text x="530" y="730">PKR</text>
+    <line x1="110" y1="760" x2="1130" y2="760" stroke="#cbd5e1"/>
+    <text x="135" y="810">Type of Account</text><text x="530" y="810">Personal</text>
+    <line x1="110" y1="840" x2="1130" y2="840" stroke="#cbd5e1"/>
+    <text x="135" y="890">Category of Account</text><text x="530" y="890">Asaan Current Account</text>
+    <line x1="110" y1="920" x2="1130" y2="920" stroke="#cbd5e1"/>
+    <text x="135" y="970">Status of Account</text><text x="530" y="970">Regular</text>
+    <line x1="110" y1="1000" x2="1130" y2="1000" stroke="#cbd5e1"/>
+    <text x="135" y="1050">Identity Document No</text><text x="530" y="1050">33202-5501234-1</text>
+  </g>
+  <text x="120" y="1195" font-family="Arial" font-size="21" fill="#111827">This certification is issued on the specific request of the account holder without any liability on the part of the bank.</text>
+  <text x="120" y="1240" font-family="Arial" font-size="21" fill="#111827">For verification, please contact the issuing branch directly. This sample is for testing only.</text>
+  <text x="620" y="1610" text-anchor="middle" font-family="Arial" font-size="22" fill="#64748b">Synthetic sample for parser and OCR testing only</text>
+  <text x="620" y="1650" text-anchor="middle" font-family="Arial" font-size="18" fill="#64748b">No real bank, no real customer, no legal validity.</text>
+</svg>
