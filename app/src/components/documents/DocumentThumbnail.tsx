@@ -1,4 +1,4 @@
-import { createElement } from 'react';
+import { createElement, useState } from 'react';
 import {
   File,
   FileCheck,
@@ -47,8 +47,9 @@ export const DocumentThumbnail = ({
   doc: Document;
   className?: string;
 }) => {
+  const [imageError, setImageError] = useState(false);
   const theme = getSectionTheme(doc.section);
-  const isImage = doc.mimeType.startsWith('image/');
+  const isImage = doc.mimeType.startsWith('image/') && !imageError;
 
   return (
     <div
@@ -65,6 +66,7 @@ export const DocumentThumbnail = ({
             alt={doc.title}
             className="h-full w-full object-cover"
             loading="lazy"
+            onError={() => setImageError(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent" />
         </>
