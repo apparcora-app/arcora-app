@@ -148,9 +148,21 @@ export const applyModernBertAssistToDraft = (
 
   if (!suggestion.shouldApply) return withMetadata;
 
+  // If the section changed (e.g. subscriptions → documents), the title and
+  // summary from the old classification are almost certainly wrong.
+  // Always override title when the section changes, not just for generic titles.
+  const sectionChanged = draft.section !== suggestion.section;
+  const shouldOverrideTitle = sectionChanged || genericTitles.has(draft.title);
+
+  // Clear the summary when the section changes so stale text (e.g. "UBL
+  // Subscription from UBL.") doesn't show under an identity document.
+  const clearedSummary = sectionChanged
+    ? `Detected as ${suggestion.title}. Review fields above and save.`
+    : (withMetadata.extractedData.summary ?? '');
+
   return {
     ...withMetadata,
-    title: genericTitles.has(draft.title) ? suggestion.title : draft.title,
+    title: shouldOverrideTitle ? suggestion.title : draft.title,
     section: suggestion.section,
     type: suggestion.type,
     classificationConfidence: Math.max(
@@ -161,16 +173,18 @@ export const applyModernBertAssistToDraft = (
       suggestion.section === 'bills'
         ? {
             ...withMetadata.suggestedBill,
-            title: genericTitles.has(draft.title) ? suggestion.title : draft.title,
+            title: shouldOverrideTitle ? suggestion.title : draft.title,
           }
         : withMetadata.suggestedBill,
     extractedData: {
       ...withMetadata.extractedData,
+      summary: clearedSummary,
       rawFields: {
         ...nextRawFields,
         'source:section': 'modernbert',
         'source:type': 'modernbert',
-        ...(genericTitles.has(draft.title) ? { 'source:title': 'modernbert' } : {}),
+        ...(shouldOverrideTitle ? { 'source:title': 'modernbert' } : {}),
+        ...(sectionChanged ? { 'source:summary': 'modernbert-cleared' } : {}),
       },
     },
   };

@@ -76,10 +76,10 @@ export const UploadDocumentDialog = ({
 
         if (percent >= lastClassifierProgressRef.current + 10 || percent === 100) {
           lastClassifierProgressRef.current = percent;
-          setSmartDetectionStatus(`Local AI model loading: ${percent}%`);
+          setSmartDetectionStatus(`Smart Detection AI loading: ${percent}%`);
         }
       } else if (progress.status === 'done') {
-        setSmartDetectionStatus('Local AI ready to review OCR results.');
+        setSmartDetectionStatus('Smart Detection AI ready to review OCR results.');
         lastClassifierProgressRef.current = 100;
       }
     });
@@ -187,7 +187,7 @@ export const UploadDocumentDialog = ({
 
     if (localDraft?.extractedText?.trim()) {
       setModernBertBusy(true);
-      setSmartDetectionStatus('Local AI reviewing document to refine the first draft...');
+      setSmartDetectionStatus('Smart Detection AI reviewing document...');
 
       localClassifier
         .classify(localDraft.extractedText, [...MODERN_BERT_LABELS])
@@ -195,7 +195,7 @@ export const UploadDocumentDialog = ({
           if (requestId !== assistRequestIdRef.current) return;
 
           if (!result) {
-            setSmartDetectionStatus('Local AI was unavailable. Existing parser result kept.');
+            setSmartDetectionStatus('Smart Detection AI was unavailable. Parser result kept.');
             return;
           }
 
@@ -209,7 +209,7 @@ export const UploadDocumentDialog = ({
             setSmartDetectionStatus(
               `Detected ${suggestion.title} (${Math.round(
                 suggestion.confidence * 100,
-              )}% confidence). Local AI refined the draft.`,
+              )}% confidence). Smart Detection AI refined the draft.`,
             );
           } else {
             setSmartDetectionStatus(
@@ -222,7 +222,7 @@ export const UploadDocumentDialog = ({
         .catch((error) => {
           console.warn('ModernBERT assist skipped:', error);
           if (requestId === assistRequestIdRef.current) {
-            setSmartDetectionStatus('Local AI was unavailable. Existing parser result kept.');
+            setSmartDetectionStatus('Smart Detection AI was unavailable. Parser result kept.');
           }
         })
         .finally(() => {
@@ -386,11 +386,11 @@ export const UploadDocumentDialog = ({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-hidden p-0">
+      <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] overflow-hidden p-0 border border-border/80 bg-background/95 dark:bg-slate-900/95 text-foreground backdrop-blur-2xl rounded-3xl shadow-2xl">
         <div className="flex h-full max-h-[90vh] flex-col">
-          <div className="shrink-0 border-b border-border px-6 py-5">
+          <div className="shrink-0 border-b border-border/60 bg-muted/20 dark:bg-slate-950/40 px-6 py-5">
             <DialogHeader>
-              <DialogTitle>Upload Document</DialogTitle>
+              <DialogTitle className="text-xl font-bold text-foreground">Upload Document</DialogTitle>
             </DialogHeader>
           </div>
 
@@ -409,8 +409,8 @@ export const UploadDocumentDialog = ({
                   </p>
                 </div>
 
-                <div className="w-full bg-muted/30 border rounded-xl p-4 text-left">
-                  <p className="text-sm font-semibold mb-2 flex items-center gap-2">
+                <div className="w-full bg-muted/30 dark:bg-slate-800/40 border border-border/60 rounded-xl p-4 text-left">
+                  <p className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
                     <Wand2 className="w-4 h-4 text-primary" />
                     Why it matched (Confidence: <span className="capitalize">{duplicateMatch.confidence}</span>)
                   </p>
@@ -453,12 +453,12 @@ export const UploadDocumentDialog = ({
             ) : (
               <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <label className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-muted/20 p-6 cursor-pointer hover:bg-muted/30 transition-all group">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <label className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border/80 bg-muted/30 dark:bg-slate-800/50 p-6 cursor-pointer hover:bg-muted/50 dark:hover:bg-slate-800/80 hover:border-primary/50 transition-all group">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Upload className="w-6 h-6 text-primary" />
                   </div>
                   <div className="mt-3 text-center">
-                    <p className="text-sm font-semibold">Upload File</p>
+                    <p className="text-sm font-semibold text-foreground">Upload File</p>
                   </div>
                   <Input
                     type="file"
@@ -468,12 +468,12 @@ export const UploadDocumentDialog = ({
                   />
                 </label>
 
-                <label className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-muted/20 p-6 cursor-pointer hover:bg-muted/30 transition-all group">
-                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <label className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border/80 bg-muted/30 dark:bg-slate-800/50 p-6 cursor-pointer hover:bg-muted/50 dark:hover:bg-slate-800/80 hover:border-purple-500/50 transition-all group">
+                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Camera className="w-6 h-6 text-purple-500" />
                   </div>
                   <div className="mt-3 text-center">
-                    <p className="text-sm font-semibold">Take Photo</p>
+                    <p className="text-sm font-semibold text-foreground">Take Photo</p>
                   </div>
                   <Input
                     type="file"
@@ -736,19 +736,20 @@ export const UploadDocumentDialog = ({
                       </div>
                     </div>
 
-                    {(draft.section === 'bills' || draft.type === 'challan' || draft.type === 'tax-document') && (
+                    {(['bills', 'subscriptions'].includes(draft.section) || ['challan', 'tax-document'].includes(draft.type)) && !['license', 'passport', 'id-card'].includes(draft.type) && !['documents', 'passwords', 'reminders', 'warranties'].includes(draft.section) && (
                       <div className="md:col-span-2 rounded-2xl border border-border p-4 bg-card transition-all hover:border-primary/20">
                         <div className="flex items-center gap-2 mb-3">
                           <Wand2 className="w-4 h-4 text-primary" />
                           <h3 className="font-semibold">
                             {draft.type === 'challan' ? 'Challan Details' : 
-                             draft.type === 'tax-document' ? 'Tax Details' : 'Bill Details'}
+                             draft.type === 'tax-document' ? 'Tax Details' : 
+                             draft.section === 'subscriptions' ? 'Subscription Details' : 'Bill Details'}
                           </h3>
                         </div>
 
                         <div className="grid gap-3 md:grid-cols-2">
                           <InputField
-                            label={draft.type === 'challan' ? 'Institution / Board' : 'Provider / Company'}
+                            label={draft.type === 'challan' ? 'Institution / Board' : draft.section === 'subscriptions' ? 'Service Provider' : 'Provider / Company'}
                             value={draft.extractedData.bill?.providerName ?? ''}
                             onChange={(value) =>
                               setDraft({
@@ -929,16 +930,6 @@ export const UploadDocumentDialog = ({
                         </div>
                       </div>
                     )}
-
-                    <div className="md:col-span-2">
-                      <label className="text-xs text-muted-foreground">Extracted Text</label>
-                      <textarea
-                        value={draft.extractedText}
-                        onChange={(e) => setDraft({ ...draft, extractedText: e.target.value })}
-                        rows={10}
-                        className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-                      />
-                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -947,9 +938,9 @@ export const UploadDocumentDialog = ({
           </div>
 
           {!duplicateMatch && (
-            <div className="shrink-0 border-t border-border px-6 py-4">
+            <div className="shrink-0 border-t border-border/60 bg-muted/20 dark:bg-slate-950/40 px-6 py-4">
             <DialogFooter className="gap-2">
-              <Button variant="ghost" onClick={() => handleClose(false)}>
+              <Button variant="ghost" onClick={() => handleClose(false)} className="text-muted-foreground hover:text-foreground">
                 Cancel
               </Button>
               <Button onClick={() => handleSave()} disabled={!file || !draft || busy}>

@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect } from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Toaster } from 'sonner';
 import { useAuthStore } from '@/store/authStore';
@@ -8,6 +8,8 @@ import { useUIStore } from '@/store/uiStore';
 import { useReminderEngine } from '@/hooks/useReminders';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
 import { marketingPageMap } from '@/components/marketing/marketingPages';
+import { trackPageView } from '@/lib/analytics';
+import { localClassifier } from '@/services/localClassifier';
 
 import arcoraLogo from './assets/branding/arcora-logo.png';
 
@@ -191,6 +193,16 @@ const AppRuntimeEffects = () => {
   return null;
 };
 
+const AnalyticsTracker = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    trackPageView(location.pathname, document.title);
+  }, [location]);
+
+  return null;
+};
+
 function App() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const isLoading = useAuthStore((state) => state.isLoading);
@@ -214,6 +226,24 @@ function App() {
     const unsubscribe = subscribeToData();
     return unsubscribe;
   }, [isAuthenticated, resetData, subscribeToData, userId]);
+
+  // Preload the SmartDetection AI (ModernBERT/WebGPU) in the background once the
+  // user is authenticated. Uses requestIdleCallback so it only starts when the
+  // browser has nothing else to do — zero impact on initial page load.
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const start = () => localClassifier.preload();
+
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(start, { timeout: 5000 });
+      return () => window.cancelIdleCallback(id);
+    }
+
+    // Fallback for browsers without requestIdleCallback (Safari < 16)
+    const id = setTimeout(start, 3000);
+    return () => clearTimeout(id);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -259,6 +289,7 @@ function App() {
       <AppRuntimeEffects />
 
       <BrowserRouter>
+        <AnalyticsTracker />
         <Suspense fallback={<AppLoadingScreen message="Loading your workspace..." />}>
           <Routes>
             <Route element={<MarketingRootLayout />}>
