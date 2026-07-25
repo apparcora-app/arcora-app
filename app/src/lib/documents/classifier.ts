@@ -2070,7 +2070,16 @@ const findCanonicalProvider = (text: string) => {
   const haystack = normalize(text);
 
   for (const alias of PROVIDER_ALIASES) {
-    if (alias.patterns.some((pattern) => haystack.includes(normalize(pattern)))) {
+    if (
+      alias.patterns.some((pattern) => {
+        const norm = normalize(pattern);
+        if (norm.length <= 4) {
+          const regex = new RegExp(`\\b${norm.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i');
+          return regex.test(haystack);
+        }
+        return haystack.includes(norm);
+      })
+    ) {
       return alias.canonical;
     }
   }
@@ -2127,11 +2136,23 @@ const scoreRule = (haystack: string, rule: KeywordRule) => {
   let score = 0;
 
   for (const keyword of rule.keywords) {
-    if (haystack.includes(normalize(keyword))) score += 1;
+    const norm = normalize(keyword);
+    if (norm.length <= 4) {
+      const regex = new RegExp(`\\b${norm.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i');
+      if (regex.test(haystack)) score += 1;
+    } else {
+      if (haystack.includes(norm)) score += 1;
+    }
   }
 
   for (const negative of rule.negativeKeywords ?? []) {
-    if (haystack.includes(normalize(negative))) score -= 1;
+    const norm = normalize(negative);
+    if (norm.length <= 4) {
+      const regex = new RegExp(`\\b${norm.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i');
+      if (regex.test(haystack)) score -= 1;
+    } else {
+      if (haystack.includes(norm)) score -= 1;
+    }
   }
 
   return score;
@@ -2170,7 +2191,15 @@ const deriveFallbackSectionAndType = (text: string, fileName: string) => {
     return { section: 'warranties' as AppSection, type: 'warranty' as DocumentType, confidence: 0.82 };
   }
 
-  if (SUBSCRIPTION_BRANDS.some((brand) => haystack.includes(normalize(brand)))) {
+  if (
+    SUBSCRIPTION_BRANDS.some((brand) => {
+      const norm = normalize(brand);
+      if (norm.length <= 4) {
+        return new RegExp(`\\b${norm.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i').test(haystack);
+      }
+      return haystack.includes(norm);
+    })
+  ) {
     return { section: 'subscriptions' as AppSection, type: 'invoice' as DocumentType, confidence: 0.88 };
   }
 
@@ -2815,8 +2844,13 @@ export const classifyUploadedDocument = (text: string, fileName: string): Classi
     dueDateText ? 'has-due-date' : undefined,
     expirationDateText ? 'has-expiry-date' : undefined,
     normalizedText.includes('cnic') || normalizedText.includes('identity card') ? 'identity-document' : undefined,
-    /certificate/i.test(text) ? 'certificate' : undefined,
-    SUBSCRIPTION_BRANDS.some((brand) => normalizedText.includes(normalize(brand))) ? 'subscription-brand' : undefined,
+    SUBSCRIPTION_BRANDS.some((brand) => {
+      const norm = normalize(brand);
+      if (norm.length <= 4) {
+        return new RegExp(`\\b${norm.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i').test(normalizedText);
+      }
+      return normalizedText.includes(norm);
+    }) ? 'subscription-brand' : undefined,
   );
 
   return {
