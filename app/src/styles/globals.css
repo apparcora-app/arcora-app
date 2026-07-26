@@ -276,10 +276,9 @@
     --pink: 340 82% 73%;
     --pink-foreground: 0 0% 0%;
 
-    /* Force light background / text so Tailwind bg-background / text-foreground
-       resolve to the light values even when html.dark is active */
-    background-color: hsl(225 100% 99%);
-    color: hsl(241 56% 19%);
+    /* Force the browser to treat this subtree as a light-mode context.
+       background-color is intentionally omitted — the shell is transparent
+       so the fixed arcora-persistent-bg atmosphere layer shows through. */
     color-scheme: light;
   }
 

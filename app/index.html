@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8" />
@@ -61,6 +61,19 @@
       color: rgba(255, 255, 255, 0.72);
     }
   </style>
+
+  <!-- Theme flash-prevention: apply persisted theme before first paint -->
+  <script>
+    try {
+      var stored = localStorage.getItem('arcora-ui-storage');
+      var parsed = stored ? JSON.parse(stored) : null;
+      var theme = parsed && parsed.state && parsed.state.theme === 'light' ? 'light' : 'dark';
+      document.documentElement.classList.remove('dark', 'light');
+      document.documentElement.classList.add(theme);
+    } catch (e) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 </head>
 
 <body>
