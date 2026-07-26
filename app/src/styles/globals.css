@@ -189,7 +189,7 @@
   }
 
   .arcora-glass-panel {
-    @apply border border-[#dbe4ff]/90 bg-white/70 backdrop-blur-2xl;
+    @apply border border-[#dbe4ff]/90 bg-white/70 backdrop-blur-2xl text-foreground;
     border-radius: 2rem;
     box-shadow:
       0 26px 70px rgba(37, 99, 235, 0.14),
@@ -198,9 +198,23 @@
   }
 
   .dark .arcora-glass-panel {
+    @apply border-slate-800/80 bg-slate-900/95 text-slate-100;
+    background: rgba(15, 23, 42, 0.95) !important;
     box-shadow:
-      0 22px 60px rgb(0 0 0 / 0.22),
+      0 22px 60px rgb(0 0 0 / 0.5),
       inset 0 1px 0 hsl(var(--foreground) / 0.045);
+  }
+
+  /* Inside the marketing shell, glass panels always stay in light mode
+     regardless of the global dark-mode class on <html>. */
+  .dark .arcora-marketing-shell .arcora-glass-panel {
+    @apply border border-[#dbe4ff]/90 bg-white/70 backdrop-blur-2xl text-foreground;
+    background: rgba(255, 255, 255, 0.70) !important;
+    border-radius: 2rem;
+    box-shadow:
+      0 26px 70px rgba(37, 99, 235, 0.14),
+      0 12px 28px rgba(15, 23, 42, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
   }
 
   .arcora-glow-edge {
@@ -219,8 +233,54 @@
       linear-gradient(180deg, hsl(var(--primary) / 0.42), transparent 50%) top right / 1px 70% no-repeat;
   }
 
+  /* ---------------------------------------------------------------
+     Marketing shell — always renders in light mode.
+     These variable overrides run at a higher specificity than
+     .dark { ... } so the marketing/landing pages are immune to
+     whatever theme the authenticated app has active.
+     --------------------------------------------------------------- */
   .arcora-marketing-shell {
     isolation: isolate;
+
+    /* Light theme tokens — mirror of :root above */
+    --background: 225 100% 99%;
+    --foreground: 241 56% 19%;
+    --card: 0 0% 100%;
+    --card-foreground: 241 56% 19%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 241 56% 19%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 229 100% 97%;
+    --secondary-foreground: 241 56% 19%;
+    --muted: 224 100% 97%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 214 100% 96%;
+    --accent-foreground: 241 56% 19%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 231 52% 90%;
+    --input: 224 44% 92%;
+    --ring: 217 91% 60%;
+    --radius: 0.75rem;
+    --success: 145 63% 49%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 93% 52%;
+    --warning-foreground: 0 0% 0%;
+    --info: 217 100% 61%;
+    --info-foreground: 0 0% 100%;
+    --purple: 252 56% 57%;
+    --purple-foreground: 0 0% 100%;
+    --teal: 174 84% 40%;
+    --teal-foreground: 0 0% 0%;
+    --pink: 340 82% 73%;
+    --pink-foreground: 0 0% 0%;
+
+    /* Force light background / text so Tailwind bg-background / text-foreground
+       resolve to the light values even when html.dark is active */
+    background-color: hsl(225 100% 99%);
+    color: hsl(241 56% 19%);
+    color-scheme: light;
   }
 
   .arcora-persistent-bg {
@@ -264,9 +324,7 @@
     inset: 0;
   }
 
-  .arcora-atmosphere-cubes {
-    will-change: transform;
-  }
+  /* Dynamic dynamic composites managed by browser */
 
   .arcora-atmosphere-grid {
     position: absolute;
@@ -290,7 +348,7 @@
       radial-gradient(circle at 36% 46%, rgba(139, 92, 246, 0.12), transparent 34%),
       linear-gradient(115deg, rgba(6, 182, 212, 0.10), transparent 34%),
       linear-gradient(245deg, rgba(147, 197, 253, 0.12), transparent 32%),
-      linear-gradient(180deg, transparent, rgb(255 255 255 / 0.78) 78%);
+      linear-gradient(180deg, transparent, rgb(244 248 255 / 0.82) 78%);
     background-size: 140% 140%, 130% 130%, 100% 100%;
     will-change: transform;
     animation: arcora-ambient-flow 22s ease-in-out infinite;
@@ -303,13 +361,11 @@
     perspective: 400px;
     animation: arcora-cube-drift var(--cube-duration) ease-in-out infinite alternate;
     animation-delay: var(--cube-delay);
-    will-change: transform;
     backface-visibility: hidden;
   }
 
   .arcora-module-icon-container {
     position: absolute;
-    will-change: transform;
     animation: arcora-module-drift var(--module-duration) ease-in-out infinite alternate;
     animation-delay: var(--module-delay);
   }
@@ -362,7 +418,6 @@
     animation: arcora-cube-sort 18s ease-in-out infinite;
     animation-delay: var(--cube-delay);
     animation-fill-mode: both;
-    will-change: transform;
     backface-visibility: hidden;
     right: 18%;
     top: 55%;
@@ -435,7 +490,7 @@
   .arcora-cube-glass .arcora-cube-face-top,
   .arcora-cube-glass .arcora-cube-face-front,
   .arcora-cube-glass .arcora-cube-face-right {
-    backdrop-filter: blur(6px);
+    /* Backdrop blur removed on desktop to prevent GPU stalls during active 3D rotations */
     border-color: rgb(255 255 255 / 0.45);
   }
 
@@ -473,7 +528,6 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg, transparent, rgb(59 130 246 / 0.36), rgb(20 184 166 / 0.32), transparent);
-    will-change: transform;
     animation: arcora-line-connect 12s ease-in-out infinite;
   }
 
@@ -815,6 +869,166 @@
     backdrop-filter: blur(12px);
   }
 
+  /* ==================================================================
+     MOBILE GPU OPTIMIZATION — ≤ 768px
+     Eliminates backdrop-blur, freezes animations, prunes will-change
+     layers. Desktop experience is completely untouched.
+     ================================================================== */
+  @media (max-width: 768px) {
+
+    /* ---------------------------------------------------------------
+       A. STRIP BACKDROP-BLUR — The #1 mobile GPU bottleneck.
+       Each blurred element forces a full off-screen texture readback
+       per frame. Only the blur is removed — original backgrounds and
+       colors are preserved at higher opacity to compensate.
+       --------------------------------------------------------------- */
+
+    /* Module icons: strip blur only, keep each color variant's own bg */
+    .arcora-module-icon {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    /* Bump color variant opacity to compensate for missing blur */
+    .arcora-module-icon--cyan  { background: rgba(6, 182, 212, 0.22) !important; }
+    .arcora-module-icon--purple { background: rgba(139, 92, 246, 0.22) !important; }
+    .arcora-module-icon--blue  { background: rgba(59, 130, 246, 0.22) !important; }
+    .arcora-module-icon--glass { background: rgba(255, 255, 255, 0.45) !important; }
+
+    .arcora-premium-card {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      /* Keep original bg-white/70 but bump opacity to avoid see-through */
+      background: rgb(255 255 255 / 0.92) !important;
+    }
+
+    .arcora-glass-panel {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      /* Match desktop bg-white/70 at higher opacity */
+      background: rgb(255 255 255 / 0.88) !important;
+    }
+
+    .glass-card {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      background: hsl(var(--card) / 0.95) !important;
+    }
+
+    .arcora-feature-page {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .arcora-module-pill {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      background: rgb(255 255 255 / 0.90) !important;
+    }
+
+    .arcora-network-cube-label {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .arcora-dashboard-preview {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .arcora-cube-glass .arcora-cube-face-top,
+    .arcora-cube-glass .arcora-cube-face-front,
+    .arcora-cube-glass .arcora-cube-face-right {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    /* Dark mode: strip blur, keep dark-variant tinted backgrounds */
+    .dark .arcora-module-icon {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .arcora-module-icon--cyan-dark  { background: rgba(6, 182, 212, 0.16) !important; }
+    .arcora-module-icon--purple-dark { background: rgba(139, 92, 246, 0.16) !important; }
+    .arcora-module-icon--blue-dark  { background: rgba(59, 130, 246, 0.16) !important; }
+    .arcora-module-icon--glass-dark { background: rgba(148, 163, 184, 0.10) !important; }
+
+    .dark .arcora-premium-card {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .dark .arcora-glass-panel {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      background: rgb(15 23 42 / 0.95) !important;
+      color: rgb(248 250 252) !important;
+      border-color: rgba(51, 65, 85, 0.8) !important;
+    }
+
+    .dark .glass-card {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    /* ---------------------------------------------------------------
+       B. HALT ANIMATIONS — Eliminate continuous GPU composite passes.
+       Elements freeze in their default position (still visible).
+       --------------------------------------------------------------- */
+    .arcora-atmosphere-grid {
+      animation: none !important;
+      will-change: auto !important;
+    }
+
+    .arcora-atmosphere-wash {
+      animation: none !important;
+      will-change: auto !important;
+    }
+
+    .arcora-floating-cube {
+      animation: none !important;
+      will-change: auto !important;
+      opacity: 0.6;
+    }
+
+    .arcora-sorting-cube {
+      animation: none !important;
+      will-change: auto !important;
+      opacity: 0;
+    }
+
+    .arcora-module-icon-container {
+      animation: none !important;
+      will-change: auto !important;
+    }
+
+    .arcora-connection-line::before {
+      animation: none !important;
+      will-change: auto !important;
+      opacity: 0.5;
+      transform: translate3d(0, 0, 0) !important;
+    }
+
+    .arcora-field-particle {
+      animation: none !important;
+      opacity: 0.35;
+    }
+
+    /* ---------------------------------------------------------------
+       C. LAYER PRUNING — Remove will-change from sub-elements.
+       Keep only on parent .arcora-atmosphere container.
+       --------------------------------------------------------------- */
+    .arcora-atmosphere-cubes {
+      will-change: auto !important;
+    }
+
+    .arcora-network-cube {
+      will-change: auto !important;
+    }
+  }
+
+  /* Existing responsive overrides (preserved) */
   @media (max-width: 767px) {
     .arcora-hero-cinematic {
       min-height: auto;
