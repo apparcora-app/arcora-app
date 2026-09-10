@@ -1,0 +1,30 @@
+{
+  "name": "arcora-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Enterprise AI Life Administration & Document Intelligence Platform with WebGPU & Infinite Canvas",
+  "workspaces": [
+    "packages/*",
+    "app",
+    "backend/cloud-run-worker"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@arcora/app",
+    "dev:backend": "npm run dev --workspace=@arcora/backend",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "keywords": [
+    "ai",
+    "webgpu",
+    "infinite-canvas",
+    "react19",
+    "typescript",
+    "intelligent-document-processing",
+    "firebase"
+  ],
+  "author": "Arcora Engineering",
+  "license": "UNLICENSED"
+}

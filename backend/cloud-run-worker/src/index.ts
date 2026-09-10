@@ -44,15 +44,15 @@ app.post('/jobs/send-push-reminders', authorizeJobRequest, async (req, res) => {
 });
 
 app.post('/process', async (req, res) => {
-  const { fileName, mimeType, fileBase64 } = req.body;
+  const { fileName, mimeType, fileBase64, ocrText } = req.body;
   
-  if (!fileBase64) {
-    return res.status(400).json({ error: 'fileBase64 is required' });
+  if (!fileBase64 && !ocrText) {
+    return res.status(400).json({ error: 'fileBase64 or ocrText is required' });
   }
 
   try {
-    const buffer = Buffer.from(fileBase64, 'base64');
-    const result = await processExtractionDirect(buffer, fileName, mimeType);
+    const buffer = fileBase64 ? Buffer.from(fileBase64, 'base64') : Buffer.from('');
+    const result = await processExtractionDirect(buffer, fileName, mimeType, ocrText);
     
     res.status(200).json({ result });
     console.log(`Successfully processed direct extraction job for: ${fileName}`);

@@ -10,8 +10,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@arcora/shared": ["../../packages/shared/dist/index.d.ts"]
     }
   },
   "include": ["src/**/*"],

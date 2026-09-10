@@ -11,6 +11,7 @@
  */
 import type { CSSProperties } from 'react';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 type GlobalAtmosphereProps = {
   className?: string;
@@ -76,6 +77,12 @@ export const GlobalAtmosphere = ({
   theme = 'light',
 }: GlobalAtmosphereProps) => {
   const isDark = theme === 'dark';
+  const isMobile = useIsMobile();
+
+  // Mobile GPU optimization: reduce DOM node counts by ~50%
+  const visibleCubes = isMobile ? floatingCubes.filter((_, i) => i % 2 === 0) : floatingCubes;
+  const visibleSortingCubes = isMobile ? sortingCubes.slice(0, 3) : sortingCubes;
+  const visibleModuleIcons = isMobile ? moduleIcons.slice(0, 4) : moduleIcons;
   const toneClass = (base: string) =>
     isDark ? `arcora-cube-${base} arcora-cube-${base}--dark` : `arcora-cube-${base}`;
 
@@ -104,7 +111,7 @@ export const GlobalAtmosphere = ({
       {/* Cubes + module icons */}
       <div className="arcora-atmosphere-cubes">
         {/* Floating cubes */}
-        {floatingCubes.map((cube) => (
+        {visibleCubes.map((cube) => (
           <span
             key={`${cube.className}-${cube.size}`}
             className={cn('arcora-floating-cube', cube.className, toneClass(cube.tone))}
@@ -127,7 +134,7 @@ export const GlobalAtmosphere = ({
         ))}
 
         {/* Sorting cubes — "chaos to order" */}
-        {sortingCubes.map((cube, i) => (
+        {visibleSortingCubes.map((cube, i) => (
           <span
             key={`sort-${i}`}
             className={cn('arcora-sorting-cube', toneClass(cube.tone))}
@@ -149,7 +156,7 @@ export const GlobalAtmosphere = ({
         ))}
 
         {/* Module label icons */}
-        {moduleIcons.map((mod) => (
+        {visibleModuleIcons.map((mod) => (
           <div
             key={mod.label}
             className={cn('arcora-module-icon-container', mod.className)}

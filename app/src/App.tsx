@@ -35,6 +35,7 @@ const loadPasswordsPage = () => import('@/components/passwords/PasswordsPage');
 const loadRemindersPage = () => import('@/components/reminders/RemindersPage');
 const loadOthersPage = () => import('@/components/others/OthersPage');
 const loadSettingsPage = () => import('@/components/settings/SettingsPage');
+const loadCanvasPage = () => import('@/components/canvas/CanvasPage');
 
 const AuthLayout = lazy(() =>
   loadAuthLayout().then((module) => ({ default: module.AuthLayout })),
@@ -119,6 +120,9 @@ const OthersPage = lazy(() =>
 );
 const SettingsPage = lazy(() =>
   loadSettingsPage().then((module) => ({ default: module.SettingsPage })),
+);
+const CanvasPage = lazy(() =>
+  loadCanvasPage().then((module) => ({ default: module.CanvasPage })),
 );
 
 const warmRouteChunks = (loaders: Array<() => Promise<unknown>>) => {
@@ -328,6 +332,7 @@ function App() {
 
             <Route element={isAuthenticated ? <MainLayout /> : <Navigate to="/login" />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/canvas" element={<CanvasPage />} />
               <Route path="/bills" element={<BillsPage />} />
               <Route path="/subscriptions" element={<SubscriptionsPage />} />
               <Route path="/warranties" element={<WarrantiesPage />} />

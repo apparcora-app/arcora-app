@@ -190,10 +190,10 @@ export const MarketingHomePage = () => {
                   All your life admin. One calm place.
                 </div>
                 <h1 className="mt-6 text-balance text-4xl font-bold leading-[1.08] tracking-tight text-[#111044] sm:text-5xl lg:text-[3.5rem]">
-                  Your household in <span className="text-blue-600">one calm place</span>
+                  The end of the <span className="text-blue-600">household filing cabinet</span>
                 </h1>
                 <p className="mt-6 text-base leading-7 text-[#475569] sm:text-lg">
-                  Arcora brings bills, documents, warranties, subscriptions, passwords, and reminders into one secure, organized workspace, so the next deadline and the record behind it are always easy to review.
+                  Arcora centralizes your documents, active receipts, warranties, and deadline alerts in one secure digital repository, completely eliminating the panic of misplaced household administration.
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-4">
@@ -303,7 +303,7 @@ export const MarketingHomePage = () => {
                     <div className={`flex h-12 w-12 items-center justify-center rounded-xl border ${card.color} transition-all`}>
                       <Icon className="h-6 w-6" />
                     </div>
-                    <h3 className="mt-5 text-lg font-bold text-[#17164d] dark:text-foreground">
+                    <h3 className="mt-5 text-lg font-bold text-[#17164d]">
                       {card.title}
                     </h3>
                     <p className="mt-3 text-sm text-[#52617f] leading-6 min-h-[72px]">
@@ -322,6 +322,23 @@ export const MarketingHomePage = () => {
 
         {/* Outer section wrapper for secondary features & FAQs */}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
+          {/* AEO & Core Copy Direct-Answer Block */}
+          <MarketingReveal as="section" className="mt-12 rounded-3xl border border-blue-100/70 bg-blue-50/30 p-6 sm:p-8 backdrop-blur-sm" delay={0.02}>
+            <div className="mx-auto max-w-4xl text-left grid gap-6 md:grid-cols-2">
+              <div>
+                <h2 className="text-xl font-bold tracking-tight text-[#17164d] sm:text-2xl">What does Arcora do?</h2>
+                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+                  Arcora is a secure digital organizer designed to replace traditional paper filing systems and scattered spreadsheets. It organizes every household document, financial receipt, warranty expiration, and account deadline into a single, searchable dashboard.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold tracking-tight text-[#17164d] sm:text-2xl">How does it prevent administrative panic?</h2>
+                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+                  By maintaining persistent DOM indices of your records and dispatching proactive countdown alerts, Arcora ensures you can instantly retrieve any document or screenshot within seconds whenever an emergency or return window arises.
+                </p>
+              </div>
+            </div>
+          </MarketingReveal>
           <MarketingReveal as="section" className="mt-12" delay={0.04}>
             <div className="mx-auto mb-8 max-w-2xl text-center">
               <p className="arcora-section-kicker">
@@ -395,7 +412,7 @@ export const MarketingHomePage = () => {
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/75">
                     {page.eyebrow}
                   </p>
-                  <h3 className="mt-3 text-xl font-semibold tracking-tight text-[#17164d] dark:text-foreground">
+                  <h3 className="mt-3 text-xl font-semibold tracking-tight text-[#17164d]">
                     {page.shortTitle}
                   </h3>
                   <p className="arcora-readable mt-3 text-sm leading-6">{page.metaDescription}</p>

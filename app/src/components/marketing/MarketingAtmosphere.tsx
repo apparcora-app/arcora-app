@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 type MarketingAtmosphereProps = {
   className?: string;
@@ -102,7 +103,15 @@ const networkCubes = [
 export const MarketingAtmosphere = ({
   className,
   variant = 'site',
-}: MarketingAtmosphereProps) => (
+}: MarketingAtmosphereProps) => {
+  const isMobile = useIsMobile();
+
+  // Mobile GPU optimization: reduce DOM node counts by ~50%
+  const visibleCubes = isMobile ? floatingCubes.filter((_, i) => i % 2 === 0) : floatingCubes;
+  const visibleSortingCubes = isMobile ? sortingCubes.slice(0, 3) : sortingCubes;
+  const visibleModuleIcons = isMobile ? moduleIcons.slice(0, 4) : moduleIcons;
+
+  return (
   <div
     aria-hidden="true"
     className={cn('arcora-atmosphere', `arcora-atmosphere--${variant}`, className)}
@@ -115,7 +124,7 @@ export const MarketingAtmosphere = ({
       ))}
     </div>
     <div className="arcora-atmosphere-cubes">
-      {floatingCubes.map((cube) => (
+      {visibleCubes.map((cube) => (
         <span
           key={`${cube.className}-${cube.size}`}
           className={cn('arcora-floating-cube', cube.className)}
@@ -137,7 +146,7 @@ export const MarketingAtmosphere = ({
         </span>
       ))}
       
-      {sortingCubes.map((cube, i) => (
+      {visibleSortingCubes.map((cube, i) => (
         <span
           key={`sort-${i}`}
           className={cn('arcora-sorting-cube', cube.tone)}
@@ -159,7 +168,7 @@ export const MarketingAtmosphere = ({
       ))}
 
       {/* Foreground Module Icons */}
-      {moduleIcons.map((module) => (
+      {visibleModuleIcons.map((module) => (
         <div
           key={module.label}
           className={cn('arcora-module-icon-container', module.className)}
@@ -183,14 +192,16 @@ export const MarketingAtmosphere = ({
       ))}
     </div>
   </div>
-);
+  );
+};
 
 export const ConnectedCubeField = ({
   className,
   density = 'hero',
 }: ConnectedCubeFieldProps) => {
   const prefersReducedMotion = useReducedMotion();
-  const shouldAnimate = !prefersReducedMotion;
+  const isMobile = useIsMobile();
+  const shouldAnimate = !prefersReducedMotion && !isMobile;
 
   return (
     <div
@@ -240,14 +251,18 @@ export const ConnectedCubeField = ({
                   path={path}
                   calcMode="linear"
                 />
-                <foreignObject width="32" height="32" x="-16" y="-16" className="overflow-visible pointer-events-none">
-                  <div className={cn("arcora-packet-cube absolute inset-0 transform scale-[0.4]", index % 2 === 0 ? "arcora-cube-cyan" : "arcora-cube-blue")}>
-                    <span className="arcora-cube-3d">
-                      <span className="arcora-cube-face-top" />
-                      <span className="arcora-cube-face-front" />
-                      <span className="arcora-cube-face-right" />
-                    </span>
-                  </div>
+                <foreignObject width="24" height="24" x="-12" y="-12" className="overflow-visible pointer-events-none">
+                  <div 
+                    className={cn(
+                      "w-3 h-3 rotate-45 transform-gpu rounded-[2px] shadow-[0_0_10px_var(--glow-color)] border border-white/60",
+                      index % 2 === 0 
+                        ? "bg-gradient-to-br from-cyan-300 to-cyan-500" 
+                        : "bg-gradient-to-br from-blue-300 to-blue-500"
+                    )}
+                    style={{
+                      "--glow-color": index % 2 === 0 ? "rgba(34, 211, 238, 0.8)" : "rgba(59, 130, 246, 0.8)"
+                    } as CSSProperties}
+                  />
                 </foreignObject>
               </g>
             )}
@@ -256,7 +271,7 @@ export const ConnectedCubeField = ({
       </svg>
 
       <div className="arcora-cube-field-particles">
-        {Array.from({ length: density === 'hero' ? 18 : 10 }).map((_, index) => (
+        {Array.from({ length: isMobile ? 8 : (density === 'hero' ? 18 : 10) }).map((_, index) => (
           <span
             key={index}
             className="arcora-field-particle"
@@ -271,7 +286,7 @@ export const ConnectedCubeField = ({
         ))}
       </div>
 
-      {networkCubes.map((cube) => (
+      {(isMobile ? networkCubes.slice(0, 4) : networkCubes).map((cube) => (
         <motion.div
           key={cube.label}
           className={cn('arcora-network-cube absolute', cube.className, cube.tone)}

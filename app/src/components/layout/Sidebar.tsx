@@ -14,6 +14,7 @@ import {
   ChevronLeft,
   ChevronRight,
   FolderKanban,
+  Layers,
 } from 'lucide-react';
 import { useUIStore } from '@/store/uiStore';
 import { useAuthStore } from '@/store/authStore';
@@ -40,6 +41,16 @@ const navItems = [
     activeWrapClassName: 'bg-blue-500/18 dark:bg-blue-500/15',
     activeIconClassName: 'text-blue-700 dark:text-blue-300',
     activeRailClassName: 'bg-blue-500 shadow-[0_0_14px_rgba(59,130,246,0.85)]',
+  },
+  {
+    path: '/canvas',
+    icon: Layers,
+    label: 'Infinite Canvas',
+    iconWrapClassName: 'bg-cyan-500/12 dark:bg-cyan-500/10',
+    iconClassName: 'text-cyan-600 dark:text-cyan-400',
+    activeWrapClassName: 'bg-cyan-500/18 dark:bg-cyan-500/15',
+    activeIconClassName: 'text-cyan-700 dark:text-cyan-300',
+    activeRailClassName: 'bg-cyan-500 shadow-[0_0_14px_rgba(6,182,212,0.85)]',
   },
   {
     path: '/bills',

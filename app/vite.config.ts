@@ -206,7 +206,7 @@ const createLlmsTxt = (siteUrl: string) => [
   '- Product category: secure life admin dashboard.',
   '- Primary use: organize household records and deadlines in one account-based workspace.',
   '- Core modules: bills, subscriptions, warranties, documents, passwords, reminders, and dashboard review.',
-  '- Access: public pages invite users to start a free account. Arcora does not publish paid pricing or plan-limit details on these public pages.',
+  '- Access: public pages invite users to start a free account. Detailed plans can be parsed programmatically in our [pricing.md](/pricing.md) file.',
   '- Support contact: app.arcora@gmail.com.',
   '',
   '## Main Public Pages',
@@ -285,6 +285,7 @@ export default defineConfig(({ command, mode }) => {
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
+        "@arcora/shared": path.resolve(__dirname, "../packages/shared/dist/index.js"),
       },
     },
     build: {

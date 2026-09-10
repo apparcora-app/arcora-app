@@ -118,15 +118,18 @@ export const processDocumentWithBackend = async (
         
         // TODO: Send a Firebase ID token and App Check token once the worker verifies
         // both server-side and enforces that the submitted uid matches the token uid.
+        const requestPayload: import('@arcora/shared').DocumentExtractionRequest = {
+          fileName: file.name,
+          mimeType: file.type,
+          fileBase64: base64,
+          ocrText: ocrText,
+          preferredModel: 'auto',
+        };
+
         const response = await fetch(new URL('/process', workerUrl).toString(), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            fileName: file.name,
-            mimeType: file.type,
-            fileBase64: base64,
-            ocrText: ocrText // Pass OCR text to backend to save it some work
-          })
+          body: JSON.stringify(requestPayload),
         });
 
         if (!response.ok) {

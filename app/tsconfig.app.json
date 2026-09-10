@@ -12,6 +12,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@arcora/shared": [
+        "../packages/shared/dist/index.d.ts"
       ]
     },
     /* Bundler mode */

@@ -1,32 +1,49 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-firebase-debug.log*
-firebase-debug.*.log*
-
-# Dependency directories
+# Dependencies
 node_modules/
 **/node_modules/
 
-# Build outputs
+# Build outputs & Bundler artifacts
 dist/
 **/dist/
 .tmp/
 **/tmp/
+tmp/
+**/tmp/
+*.tsbuildinfo
+.eslintcache
 
-# Firebase cache & secrets
-.firebase/
-.firebaserc
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Environment Variables & Secrets (Quarantine all .env files except .env.example)
+.env*
+**/.env*
+!.env.example
+!**/.env.example
+service-account.json
+**/service-account.json
+*.pem
+*.key
+*.cert
 
-# IDE & OS files
+# Agent Caches & IDE Transients
+.backup/
+**/.backup/
+.agent/
+**/.agent/
+.agents/
+**/.agents/
+.jetro/
+**/.jetro/
+.cursor/
+**/.cursor/
+.windsurfrules
+**/.windsurfrules
+.claude/
+**/.claude/
+.codex/
+**/.codex/
+data/
+projects/
+
+# IDE & Editor files
 .idea/
 .vscode/
 *.suo
@@ -36,3 +53,26 @@ dist/
 *.sw?
 .DS_Store
 Thumbs.db
+
+# Logs & Error dumps
+logs/
+*.log
+**/*.log
+.codex-*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+firebase-debug.log*
+firebase-debug.*.log*
+build_errors*.txt
+**/*_cmd.txt
+
+# Heavy model binaries (handled via CDN or separate assets)
+*.traineddata
+backend/cloud-run-worker/eng.traineddata
+
+# Firebase Cache
+.firebase/
+.firebaserc
+**/.firebaserc
+

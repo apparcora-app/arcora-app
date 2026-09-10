@@ -1,0 +1,28 @@
+{
+  "name": "@arcora/shared",
+  "version": "1.0.0",
+  "description": "Shared domain models, financial schemas, and validation utilities for Arcora",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/ --ext .ts"
+  },
+  "dependencies": {
+    "zod": "^3.24.2 || ^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "zod": "^3.24.2"
+  }
+}
