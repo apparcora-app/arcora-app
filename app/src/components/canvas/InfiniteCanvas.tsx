@@ -30,6 +30,7 @@ export const InfiniteCanvas: React.FC = () => {
   } = useCanvasStore();
 
   const [mouseWorldPos, setMouseWorldPos] = useState({ x: 0, y: 0 });
+  const [isPanning, setIsPanning] = useState(false);
 
   const isSpacePressedRef = useRef(false);
 
@@ -54,6 +55,7 @@ export const InfiniteCanvas: React.FC = () => {
     // Only pan if clicking empty canvas space or using pan tool or middle mouse
     if (e.button === 1 || activeTool === 'pan' || isSpacePressedRef.current) {
       isPanningRef.current = true;
+      setIsPanning(true);
       panStartRef.current = { x: e.clientX, y: e.clientY };
       return;
     }
@@ -64,6 +66,7 @@ export const InfiniteCanvas: React.FC = () => {
       }
       clearSelection();
       isPanningRef.current = true;
+      setIsPanning(true);
       panStartRef.current = { x: e.clientX, y: e.clientY };
     }
   };
@@ -84,6 +87,7 @@ export const InfiniteCanvas: React.FC = () => {
 
   const handlePointerUp = () => {
     isPanningRef.current = false;
+    setIsPanning(false);
   };
 
   // Port Click Handler to create C2 Wires
@@ -162,7 +166,7 @@ export const InfiniteCanvas: React.FC = () => {
       onPointerUp={handlePointerUp}
       className="relative w-full h-[calc(100vh-4rem)] overflow-hidden bg-slate-950 select-none cursor-default"
       style={{
-        cursor: isPanningRef.current ? 'grabbing' : activeTool === 'pan' ? 'grab' : 'default',
+        cursor: isPanning ? 'grabbing' : activeTool === 'pan' ? 'grab' : 'default',
       }}
     >
       {/* Background Dot Grid */}
