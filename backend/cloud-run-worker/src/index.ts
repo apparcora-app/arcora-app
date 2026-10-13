@@ -10,6 +10,8 @@ const app = express();
 app.use(express.json({ limit: '50mb' }));
 app.use(cors({ origin: true }));
 
+import crypto from 'crypto';
+
 const hasValidJobSecret = () => Boolean(process.env.PUSH_JOB_SECRET);
 
 const authorizeJobRequest: express.RequestHandler = (req, res, next) => {
@@ -20,8 +22,20 @@ const authorizeJobRequest: express.RequestHandler = (req, res, next) => {
   }
 
   const providedSecret = req.header('x-arcora-job-secret');
-  if (providedSecret !== process.env.PUSH_JOB_SECRET) {
-    res.status(401).json({ error: 'Unauthorized' });
+  if (!providedSecret) {
+    res.status(401).json({ error: 'Unauthorized: missing secret header' });
+    return;
+  }
+
+  const expectedSecret = process.env.PUSH_JOB_SECRET!;
+  const providedBuffer = Buffer.from(providedSecret);
+  const expectedBuffer = Buffer.from(expectedSecret);
+
+  if (
+    providedBuffer.length !== expectedBuffer.length ||
+    !crypto.timingSafeEqual(providedBuffer, expectedBuffer)
+  ) {
+    res.status(401).json({ error: 'Unauthorized: invalid secret' });
     return;
   }
 
