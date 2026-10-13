@@ -2,18 +2,24 @@
 
 <div align="center">
 
+[![CI Pipeline](https://github.com/apparcora-app/arcora-app/actions/workflows/ci.yml/badge.svg)](https://github.com/apparcora-app/arcora-app/actions)
+[![TypeScript Strict](https://img.shields.io/badge/TypeScript-Strict%205.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Automated Tests](https://img.shields.io/badge/Automated%20Tests-Verified%20Passing-success?style=for-the-badge&logo=vitest&logoColor=white)](https://github.com/apparcora-app/arcora-app)
 [![React 19](https://img.shields.io/badge/React-19.2.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![WebGPU](https://img.shields.io/badge/WebGPU-Accelerated-00599C?style=for-the-badge&logo=webgpu&logoColor=white)](https://www.w3.org/TR/webgpu/)
 [![Firebase](https://img.shields.io/badge/Firebase-Serverless-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Gemini](https://img.shields.io/badge/Google%20Gemini-Flash%202.0-8E75C2?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-gpt--4o--mini-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Vite](https://img.shields.io/badge/Vite-7.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7.3-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e.svg?style=for-the-badge)](LICENSE)
+[![Live Production Demo](https://img.shields.io/badge/Live_Demo-arcora--cd7d0.web.app-0284c7?style=for-the-badge&logo=google-chrome&logoColor=white)](https://arcora-cd7d0.web.app)
 
 <p align="center">
   <strong>Next-Generation Personal Life OS with WebGPU-Accelerated Zero-Shot Document Classification, Reactive Spatial Infinite Canvas, and Cascading Multi-Model LLM Orchestration.</strong>
 </p>
+
+[Explore Live Demo](https://arcora-cd7d0.web.app) • [System Architecture](#-system-architecture) • [IDP Pipeline](#2-cascading-3-tier-intelligent-document-processing-idp-pipeline) • [Quickstart](#-developer-setup--quickstart) • [Security & Privacy](#-zero-knowledge-security-architecture)
 
 </div>
 

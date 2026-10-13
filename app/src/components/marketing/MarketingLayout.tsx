@@ -4,7 +4,6 @@ import { ArrowRight, Mail, Menu, ShieldCheck, X } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ConnectedCubeField } from '@/components/marketing/MarketingAtmosphere';
-import { marketingPages } from '@/components/marketing/marketingPages';
 import arcoraLogo from '@/assets/branding/arcora-logo.png';
 
 type MarketingLayoutProps = {

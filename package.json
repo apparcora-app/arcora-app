@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "description": "Enterprise AI Life Administration & Document Intelligence Platform with WebGPU & Infinite Canvas",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apparcora-app/arcora-app.git"
+  },
   "workspaces": [
     "packages/*",
     "app",
@@ -25,6 +30,5 @@
     "intelligent-document-processing",
     "firebase"
   ],
-  "author": "Arcora Engineering",
-  "license": "UNLICENSED"
+  "author": "Arcora Engineering"
 }

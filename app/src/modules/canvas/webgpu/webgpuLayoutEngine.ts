@@ -7,7 +7,59 @@
 import type { CanvasNode, CanvasEdge, Point } from '@arcora/shared';
 
 // WebGPU Interface Shims for cross-environment type safety
-type GPUDeviceAny = any;
+interface GPUBufferShim {
+  byteLength?: number;
+  getMappedRange(): ArrayBuffer;
+  unmap(): void;
+  mapAsync(mode: number): Promise<void>;
+  destroy(): void;
+}
+
+interface GPUComputePassEncoderShim {
+  setPipeline(pipeline: unknown): void;
+  setBindGroup(index: number, bindGroup: unknown): void;
+  dispatchWorkgroups(workgroupCountX: number): void;
+  end(): void;
+}
+
+interface GPUCommandEncoderShim {
+  beginComputePass(): GPUComputePassEncoderShim;
+  copyBufferToBuffer(
+    source: GPUBufferShim,
+    sourceOffset: number,
+    destination: GPUBufferShim,
+    destinationOffset: number,
+    size: number
+  ): void;
+  finish(): unknown;
+}
+
+interface GPUComputePipelineShim {
+  getBindGroupLayout(index: number): unknown;
+}
+
+interface GPUDeviceShim {
+  createShaderModule(descriptor: { code: string }): unknown;
+  createBuffer(descriptor: { size: number; usage: number; mappedAtCreation?: boolean }): GPUBufferShim;
+  createComputePipeline(descriptor: { layout: string; compute: { module: unknown; entryPoint: string } }): GPUComputePipelineShim;
+  createBindGroup(descriptor: { layout: unknown; entries: Array<{ binding: number; resource: { buffer: GPUBufferShim } }> }): unknown;
+  createCommandEncoder(): GPUCommandEncoderShim;
+  queue: {
+    writeBuffer(buffer: GPUBufferShim, bufferOffset: number, data: BufferSource): void;
+    submit(commandBuffers: unknown[]): void;
+    onSubmittedWorkDone?(): Promise<void>;
+  };
+}
+
+interface GPUAdapterShim {
+  requestDevice(): Promise<GPUDeviceShim>;
+}
+
+interface NavigatorWithGPU {
+  gpu?: {
+    requestAdapter(): Promise<GPUAdapterShim | null>;
+  };
+}
 
 const GPUBufferUsage = {
   MAP_READ: 0x0001,
@@ -88,7 +140,7 @@ fn main(@builtin(global_invocation_id) global_id: vec3<u32>) {
 `;
 
 export class WebGpuLayoutEngine {
-  private device: GPUDeviceAny | null = null;
+  private device: GPUDeviceShim | null = null;
   private isWebGpuSupported: boolean = false;
   private initPromise: Promise<boolean> | null = null;
 
@@ -102,7 +154,7 @@ export class WebGpuLayoutEngine {
 
   private async initDevice(): Promise<boolean> {
     try {
-      const nav = navigator as any;
+      const nav = navigator as unknown as NavigatorWithGPU;
       if (!nav.gpu) return false;
       const adapter = await nav.gpu.requestAdapter();
       if (!adapter) return false;

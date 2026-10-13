@@ -8,7 +8,6 @@ import {
   Bell,
   BellRing,
   CheckCircle2,
-  ChevronLeft,
   ChevronRight,
   CreditCard,
   FileStack,
@@ -23,19 +22,15 @@ import {
   Search,
   Plus,
   Upload,
-  Info,
-  Activity,
   Sun,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MarketingLayout } from '@/components/marketing/MarketingLayout';
 import {
-  ConnectedCubeField,
   MarketingReveal,
 } from '@/components/marketing/MarketingAtmosphere';
 import { marketingPages } from '@/components/marketing/marketingPages';
 import { SEOHead } from '@/components/seo/SEOHead';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   createFaqSchema,
@@ -69,30 +64,6 @@ const homeFaqs = [
 
 const logoCloud = ['Bills', 'Subscriptions', 'Warranties', 'Documents', 'Passwords', 'Reminders'];
 
-const solutionRows = [
-  {
-    title: 'Household admin gets scattered quickly',
-    description:
-      'Bills live in email, subscriptions renew in the background, warranties hide in folders, and important dates often depend on memory.',
-  },
-  {
-    title: 'Arcora gives those records one organized home',
-    description:
-      'Keep bills, subscriptions, warranties, documents, passwords, reminders, and deadlines in a dedicated life admin dashboard.',
-  },
-  {
-    title: 'Review what needs attention next',
-    description:
-      'Use one review layer to see what is due soon, what renews next, and which record supports the action before it becomes urgent.',
-  },
-];
-
-const productSignals = [
-  { label: 'Product category', value: 'Life admin' },
-  { label: 'Core modules', value: '6' },
-  { label: 'Review layer', value: 'Dashboard' },
-];
-
 const audienceRows = [
   {
     title: 'Busy households',
@@ -111,15 +82,6 @@ const audienceRows = [
   },
 ];
 
-const featureOrbits = [
-  { icon: Receipt, label: 'Bills', delay: 0, className: 'left-[8%] top-[28%] text-amber-600 bg-amber-100' },
-  { icon: CreditCard, label: 'Subscriptions', delay: 0.45, className: 'left-[27%] top-[6%] text-violet-600 bg-violet-100' },
-  { icon: BadgeCheck, label: 'Warranties', delay: 0.9, className: 'right-[18%] top-[8%] text-emerald-600 bg-emerald-100' },
-  { icon: FileText, label: 'Documents', delay: 1.35, className: 'right-[7%] top-[36%] text-cyan-700 bg-cyan-100' },
-  { icon: KeyRound, label: 'Passwords', delay: 1.8, className: 'bottom-[15%] right-[27%] text-rose-600 bg-rose-100' },
-  { icon: BellRing, label: 'Reminders', delay: 2.25, className: 'bottom-[18%] left-[24%] text-orange-600 bg-orange-100' },
-];
-
 const previewPanels = [
   {
     icon: Receipt,
@@ -136,21 +98,6 @@ const previewPanels = [
     title: 'Review what is next',
     rows: ['Upcoming bills', 'Renewing subscriptions', 'Important dates'],
   },
-];
-
-const heroModules = [
-  { icon: Receipt, label: 'Bills', detail: 'Due dates', tone: 'text-blue-600 bg-blue-50' },
-  { icon: CreditCard, label: 'Subscriptions', detail: 'Renewals', tone: 'text-indigo-600 bg-indigo-50' },
-  { icon: BadgeCheck, label: 'Warranties', detail: 'Coverage', tone: 'text-teal-600 bg-teal-50' },
-  { icon: FileText, label: 'Documents', detail: 'Records', tone: 'text-cyan-700 bg-cyan-50' },
-  { icon: KeyRound, label: 'Passwords', detail: 'Access', tone: 'text-violet-600 bg-violet-50' },
-  { icon: BellRing, label: 'Reminders', detail: 'Next actions', tone: 'text-sky-600 bg-sky-50' },
-];
-
-const dashboardRows = [
-  { label: 'Internet bill', meta: 'Due tomorrow', status: 'Statement attached' },
-  { label: 'Home warranty', meta: 'Expires in 18 days', status: 'Receipt saved' },
-  { label: 'Cloud storage plan', meta: 'Renews May 30', status: 'Review before charge' },
 ];
 
 export const MarketingHomePage = () => {

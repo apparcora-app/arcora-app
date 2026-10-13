@@ -5,7 +5,6 @@ import type {
   CanvasViewport,
   Point,
   C2ChannelMessage,
-  CanvasNodeType,
 } from '@arcora/shared';
 import { webGpuLayoutEngine } from '@/modules/canvas/webgpu/webgpuLayoutEngine';
 

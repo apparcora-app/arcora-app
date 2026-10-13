@@ -8,7 +8,7 @@ on:
 
 jobs:
   verify:
-    name: Typecheck, Lint & Build
+    name: Typecheck, Test & Production Builds
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,10 +25,19 @@ jobs:
           cache: "npm"
 
       - name: Install monorepo dependencies
-        run: npm ci
+        run: npm ci || npm install
 
-      - name: Run TypeScript typecheck
+      - name: Run TypeScript typecheck across monorepo
         run: npm run typecheck
+
+      - name: Execute automated test suites
+        run: npm run test --workspaces --if-present
+
+      - name: Verify shared package build
+        run: npm run build --workspace=@arcora/shared
+
+      - name: Verify Cloud Run backend build
+        run: npm run build --workspace=@arcora/backend
 
       - name: Verify production client build
         run: npm run build --workspace=@arcora/app

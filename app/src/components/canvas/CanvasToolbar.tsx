@@ -3,7 +3,6 @@ import {
   MousePointer,
   Hand,
   Share2,
-  Plus,
   Cpu,
   ZoomIn,
   ZoomOut,

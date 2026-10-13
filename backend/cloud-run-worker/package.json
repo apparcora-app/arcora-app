@@ -4,7 +4,7 @@
   "description": "Serverless multi-model LLM orchestration gateway and background worker",
   "main": "dist/index.js",
   "scripts": {
-    "test": "node -e \"console.log('All backend smoke checks passed'); process.exit(0)\"",
+    "test": "npx --yes tsx test/parsers_and_mappers.test.ts",
     "dev": "ts-node-dev -r dotenv/config src/index.ts",
     "start": "node dist/index.js",
     "build": "tsc",
@@ -18,7 +18,7 @@
     "document-processing"
   ],
   "author": "Arcora Engineering",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "@arcora/shared": "*",
@@ -42,6 +42,7 @@
     "@types/pdf-parse": "^1.1.5",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
+    "tsx": "^4.20.5",
     "typescript": "^6.0.2"
   }
 }
